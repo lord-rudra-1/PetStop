@@ -1,11 +1,16 @@
-const Pet = require('../Model/PetModelSQL');
+const Pet = require('../models/Pet');
 const fs = require('fs');
 const path = require('path');
 
 const postPetRequest = async (req, res) => {
   try {
     const { name, age, area, justification, email, phone, type } = req.body;
-    const { filename } = req.file;
+    
+    // Handle case where file upload might be missing
+    let filename = 'default-pet.jpg';
+    if (req.file && req.file.filename) {
+      filename = req.file.filename;
+    }
 
     const pet = await Pet.create({
       name,
@@ -21,6 +26,7 @@ const postPetRequest = async (req, res) => {
 
     res.status(200).json(pet);
   } catch (error) {
+    console.error('Error creating pet record:', error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -28,7 +34,7 @@ const postPetRequest = async (req, res) => {
 const approveRequest = async (req, res) => {
   try {
     const id = req.params.id;
-    const { email, phone, status } = req.body;
+    const { status } = req.body;
     
     const pet = await Pet.findByPk(id);
     
@@ -36,13 +42,13 @@ const approveRequest = async (req, res) => {
       return res.status(404).json({ error: 'Pet not found' });
     }
     
-    pet.email = email;
-    pet.phone = phone;
+    // Update only status field
     pet.status = status;
     await pet.save();
     
     res.status(200).json(pet);
   } catch (err) {
+    console.error('Error approving pet request:', err);
     res.status(500).json({ error: err.message });
   }
 };
@@ -60,6 +66,7 @@ const allPets = async (reqStatus, req, res) => {
       res.status(404).json({ error: 'No data found' });
     }
   } catch (err) {
+    console.error('Error fetching pets:', err);
     res.status(500).json({ error: err.message });
   }
 };
@@ -73,15 +80,18 @@ const deletePost = async (req, res) => {
       return res.status(404).json({ error: 'Pet not found' });
     }
     
-    const filePath = path.join(__dirname, '../images', pet.filename);
-
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
+    // Delete associated image if it exists and is not the default
+    if (pet.filename !== 'default-pet.jpg') {
+      const filePath = path.join(__dirname, '../images', pet.filename);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
     }
     
     await pet.destroy();
     res.status(200).json({ message: 'Pet deleted successfully' });
   } catch (err) {
+    console.error('Error deleting pet:', err);
     res.status(500).json({ error: err.message });
   }
 };

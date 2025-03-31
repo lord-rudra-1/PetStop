@@ -1,11 +1,11 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const sequelize = require('../util/index');
 
-const Pet = sequelize.define('Pet', {
+const Pet = sequelize.define('Pets', {
   id: {
     type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   name: {
     type: DataTypes.STRING,

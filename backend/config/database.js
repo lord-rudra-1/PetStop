@@ -3,24 +3,29 @@ require('dotenv').config();
 
 let sequelize;
 
-// If using SQLite
-if (process.env.DB_DIALECT === 'sqlite') {
+// Check if using SQLite
+if (process.env.DIALECT === 'sqlite') {
   sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: process.env.DB_STORAGE || './database.sqlite',
     logging: false
   });
 } else {
-  // MySQL or other database
+  // MySQL database connection with SSL
   sequelize = new Sequelize(
     process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD, 
+    process.env.DB_USERNAME,
+    process.env.PASS, 
     {
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      dialect: process.env.DB_DIALECT || 'mysql',
-      logging: false
+      host: process.env.HOST,
+      port: process.env.PORT,
+      dialect: process.env.DIALECT || 'mysql',
+      logging: false,
+      dialectOptions: {
+        ssl: {
+          rejectUnauthorized: true
+        }
+      }
     }
   );
 }
@@ -28,9 +33,11 @@ if (process.env.DB_DIALECT === 'sqlite') {
 const connectToDatabase = async () => {
   try {
     await sequelize.authenticate();
-    console.log(`Connection to ${process.env.DB_DIALECT || 'mysql'} database has been established successfully.`);
+    console.log(`Connection to ${process.env.DIALECT || 'mysql'} database has been established successfully.`);
+    return true;
   } catch (error) {
     console.error('Unable to connect to the database:', error);
+    return false;
   }
 };
 

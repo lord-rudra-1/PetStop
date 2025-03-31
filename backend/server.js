@@ -37,7 +37,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Import routes
+// Import routes - update to use SQL versions
 const petRouter = require('./Routes/PetRouteSQL');
 const AdoptFormRoute = require('./Routes/AdoptFormRouteSQL');
 const AdminRoute = require('./Routes/AdminRouteSQL');

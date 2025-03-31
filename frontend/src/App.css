@@ -88,7 +88,7 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     background-color: var(--light);
-    margin-top: -30px;
+    margin-top: -100px;
 }
 
 .homeContainer-left {
@@ -97,7 +97,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     padding-right: 40px;
-    margin-top: -20px;
+    margin-top: -50px;
 }
 
 .home-title {
@@ -106,7 +106,7 @@ body {
     line-height: 1.2;
     font-weight: bold;
     font-family: 'Preahvihear', sans-serif;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     letter-spacing: -1px;
 }
 
@@ -114,7 +114,7 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .home-titlePlusPng>img {
@@ -125,7 +125,7 @@ body {
 .home-second-para {
     font-size: 32px;
     color: var(--primary);
-    margin: 20px 0px 20px 0px;
+    margin: 5px 0px 5px 0px;
     line-height: 1.6;
     font-weight: 500;
     max-width: 800px;
@@ -138,7 +138,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin-top: -20px;
+    margin-top: -50px;
 }
 
 .homeContainer-right img {
@@ -196,7 +196,7 @@ body {
 
 .planning-container {
     padding: 40px;
-    margin-top: 30px;
+    margin-top: 0px;
     border-radius: 40px;
     display: flex;
     justify-content: space-between;
@@ -620,7 +620,7 @@ body {
     height: 180px;
     margin: auto;
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 20px;
     border-radius: 40px 50px 20px 20px;
     display: flex;
     justify-content: space-between;
@@ -646,6 +646,7 @@ body {
     line-height: 1.2;
     text-align: right;
     padding-right: 40px;
+    margin-top: -90px;
 }
 
 .adopted-pets-num {
@@ -668,6 +669,7 @@ body {
     text-align: left;
     padding-right: 30px;
     padding-left: 10px;
+    margin-top: -80px;
 }
 
 .we-do {
@@ -1641,10 +1643,12 @@ body {
 }
 
 .landing-content p {
-  margin-bottom: 30px;
-  font-size: 18px;
-  color: var(--primary);
+  font-size: 28px;
   line-height: 1.6;
+  color: var(--primary);
+  margin-bottom: 30px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
 }
 
 .buttons-container {
@@ -1728,7 +1732,7 @@ body {
 }
 
 .planning-content p {
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1.6;
   color: var(--primary);
 }
@@ -1754,3 +1758,6 @@ body {
     margin: 0 auto;
   }
 }
+
+
+

@@ -19,8 +19,8 @@ const HomeLandingContainer = ({ description }) => {
   return (
     <div className="home-landing-container">
       <div className="landing-content">
-        <h1>Give Love, Get Love – Adopt a Pet Today!</h1>
-        <p >{description}</p>
+        <h1>Give Love, Get Love - Adopt a Pet Today!</h1>
+          <p style={{fontSize: "25px"}}>Ensure you are fully prepared to provide proper care and attention to your pet before welcoming them into your home.</p>
         <div className="buttons-container">
           <button className="primary-btn">Adopt Now</button>
           <button className="secondary-btn">Learn More</button>
@@ -60,7 +60,7 @@ const PlanningToAdoptAPet = () => {
     <div className="planning-container">
       <h2>Planning to Adopt a Pet?</h2>
       <div className="planning-content">
-        <p>
+        <p className="ensure_you">
           Welcoming a pet into your home is a big decision. Before you adopt, consider if you can commit to caring for a pet for its entire life, provide proper nutrition, veterinary care, and adequate exercise.
         </p>
       </div>

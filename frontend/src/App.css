@@ -42,8 +42,8 @@ body {
 
 .logo-container>p {
     font-family: 'Oxygen', sans-serif;
-    margin-left: 10px;
-    font-size: 32px;
+    /* margin-left: 10px; */
+    font-size: 40px;
 }
 
 .navbar-links li {
@@ -404,7 +404,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 35px;
+    padding: 5px 35px;
 }
 
 .navbar-logo {

@@ -5,13 +5,15 @@
 }
 
 :root {
-    --orange: #fea034;
-    --hoverorange: #ff9317;
-    --Lightorange: rgb(231, 158, 75);
-    --white: white;
-    --black: black;
-    --textGrey: rgb(237, 233, 233);
-    --darkGrey: #1F2130;
+    --primary: #210F37;
+    --secondary: #4F1C51;
+    --accent: #A55B4B;
+    --light: #DCA06D;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--primary);
 }
 
 .navbar-container {
@@ -21,6 +23,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 35px;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    box-shadow: 0 2px 10px rgba(33, 15, 55, 0.2);
 }
 
 .navbar-logo {
@@ -29,7 +33,7 @@
 }
 
 .logo-container {
-    color: var(--black);
+    color: var(--light);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -49,20 +53,21 @@
 
 .navbar-links li>* {
     text-decoration: none;
-    border: 2px var(--white) solid;
+    border: 2px var(--light) solid;
     padding: 5px 15px;
     font-family: 'Oxygen', sans-serif;
     font-weight: bold;
     font-size: 15px;
     border-radius: 20px;
-    color: var(--black);
+    color: var(--light);
+    transition: all 0.3s ease;
 }
 
 .navbar-links li>*:hover {
-    border: 2px var(--hoverorange) solid;
-    background-color: var(--hoverorange);
-    color: var(--white);
-    box-shadow: 1.5px 1.5px 3px var(--hoverorange);
+    border: 2px var(--accent) solid;
+    background-color: var(--accent);
+    color: var(--light);
+    box-shadow: 1.5px 1.5px 3px var(--accent);
 }
 
 @media (max-width: 768px) {
@@ -82,6 +87,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: var(--light);
 }
 
 .homeContainer-left {
@@ -92,6 +98,7 @@
 }
 
 .home-title {
+    color: var(--primary);
     font-size: 70px;
     line-height: 1.2;
     font-weight: bold;
@@ -111,7 +118,7 @@
 
 .home-second-para {
     font-size: 18px;
-    color: grey;
+    color: var(--primary);
     margin: 20px 0px 20px 0px;
 }
 
@@ -131,23 +138,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px var(--orange) solid;
+    border: 2px var(--primary) solid;
     height: 42px;
     width: 145px;
     font-weight: bold;
     font-size: 15px;
     border-radius: 20px;
-    background-color: var(--orange);
-    color: var(--white);
-    box-shadow: 1.5px 1.5px 3px var(--orange);
+    background-color: var(--primary);
+    color: var(--light);
+    box-shadow: 1.5px 1.5px 3px var(--primary);
     font-family: 'Preahvihear', sans-serif;
+    transition: all 0.3s ease;
 }
 
 .Home-button:hover {
-    border: 2px var(--hoverorange) solid;
-    background-color: var(--hoverorange);
-    color: var(--white);
-    transition: all 0.3s ease;
+    border: 2px var(--secondary) solid;
+    background-color: var(--secondary);
+    color: var(--light);
     cursor: pointer;
 }
 
@@ -159,12 +166,14 @@
 }
 
 .planning-container {
-    padding: 10px;
+    padding: 20px;
     margin-top: 30px;
-    border-radius: 40px 50px 20px 20px;
+    border-radius: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: linear-gradient(135deg, var(--light), var(--accent));
+    box-shadow: 0 4px 15px rgba(165, 91, 75, 0.2);
 }
 
 .left-pic>img {
@@ -188,8 +197,9 @@
 }
 
 .we-do {
-    color: var(--orange);
+    color: var(--primary);
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .card-container h2 {
@@ -355,7 +365,7 @@
 }
 
 .logo-container {
-    color: var(--black);
+    color: var(--light);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -375,42 +385,42 @@
 
 .navbar-links li>* {
     text-decoration: none;
-    border: 2px var(--white) solid;
+    border: 2px var(--light) solid;
     padding: 5px 15px;
     font-family: 'Oxygen', sans-serif;
     font-weight: bold;
     font-size: 15px;
     border-radius: 20px;
-    color: var(--black);
+    color: var(--light);
 }
 
 .navbar-links li>*:hover {
-    border: 2px var(--hoverorange) solid;
-    background-color: var(--hoverorange);
-    color: var(--white);
-    box-shadow: 1.5px 1.5px 3px var(--hoverorange);
+    border: 2px var(--accent) solid;
+    background-color: var(--accent);
+    color: var(--light);
+    box-shadow: 1.5px 1.5px 3px var(--accent);
 }
 
 .Navbar-button {
-    border: 2px var(--orange) solid;
+    border: 2px var(--primary) solid;
     height: 42px;
     width: 105px;
     font-family: 'Oxygen', sans-serif;
     font-weight: bold;
     font-size: 15px;
     border-radius: 20px;
-    background-color: var(--orange);
-    color: var(--white);
-    box-shadow: 1.5px 1.5px 3px var(--orange);
+    background-color: var(--primary);
+    color: var(--light);
+    box-shadow: 1.5px 1.5px 3px var(--primary);
     transition: all 0.3s ease; 
 }
 
 .Navbar-button:hover {
-    border: 2px var(--hoverorange) solid;
-    background-color: var(--hoverorange);
-    color: var(--white);
+    border: 2px var(--secondary) solid;
+    background-color: var(--secondary);
+    color: var(--light);
     transform: scale(1.05); 
-    box-shadow: 2px 2px 5px var(--hoverorange);
+    box-shadow: 2px 2px 5px var(--accent);
     animation: bounce 0.5s ease;
     cursor: pointer;
 }
@@ -493,23 +503,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px var(--orange) solid;
+    border: 2px var(--primary) solid;
     height: 42px;
     width: 145px;
     font-weight: bold;
     font-size: 15px;
     border-radius: 20px;
-    background-color: var(--orange);
-    color: var(--white);
-    box-shadow: 1.5px 1.5px 3px var(--orange);
+    background-color: var(--primary);
+    color: var(--light);
+    box-shadow: 1.5px 1.5px 3px var(--primary);
     font-family: 'Preahvihear', sans-serif;
+    transition: all 0.3s ease;
 }
 
 .Home-button:hover {
-    border: 2px var(--hoverorange) solid;
-    background-color: var(--hoverorange);
-    color: var(--white);
-    transition: all 0.3s ease;
+    border: 2px var(--secondary) solid;
+    background-color: var(--secondary);
+    color: var(--light);
     cursor: pointer;
 }
 
@@ -609,8 +619,9 @@ body {
 }
 
 .we-do {
-    color: var(--orange);
+    color: var(--primary);
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 
@@ -622,10 +633,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: var(--light);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(143, 135, 241, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card-container:hover {
+    transform: translateY(-5px);
 }
 
 .card-container h2 {
-    color: var(--orange);
+    color: var(--primary);
     text-align: center;
     padding: 30px 0px 30px 0px;
 }
@@ -633,30 +653,24 @@ body {
 .card-container p {
     text-align: center;
     font-size: 15px;
-    color: var(--darkGrey);
+    color: var(--primary);
 }
 
 
 .card-button {
     margin-top: 40px;
-    border: 2px var(--orange) solid;
-    height: 42px;
-    width: 120px;
-    font-family: 'Oxygen', sans-serif;
-    font-weight: bold;
-    font-size: 15px;
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    padding: 10px 20px;
     border-radius: 20px;
-    background-color: var(--white);
-    color: var(--orange);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .card-button:hover {
-    box-shadow: 1.5px 1.5px 3px var(--hoverorange);
-    border: 2px var(--hoverorange) solid;
-    background-color: var(--hoverorange);
-    color: var(--white);
-    transition: all 0.3s ease;
-    cursor: pointer;
+    background-color: var(--secondary);
+    transform: scale(1.05);
 }
 
 
@@ -669,8 +683,8 @@ body {
 .adopt-section h2 {
     font-family: "Varela Round", sans-serif;
     padding-bottom: 10px;
-    color: var(--orange);
-    border-bottom: 2px solid var(--orange);
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
     font-size: 32px;
     margin-bottom: 20px;
 }
@@ -690,7 +704,7 @@ body {
 }
 
 .adopt-section h3 {
-    color: var(--orange);
+    color: var(--primary);
     font-size: 20px;
     margin-top: 20px;
 }
@@ -711,20 +725,22 @@ body {
 
 .cta-button {
     display: inline-block;
-    padding: 10px 16px;
-    background-color: var(--orange);
-    color: var(--white);
+    padding: 12px 25px;
+    background-color: var(--primary);
+    color: var(--light);
     text-decoration: none;
-    border-radius: 100px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
     border: none;
+    box-shadow: 0 2px 8px rgba(33, 15, 55, 0.3);
 }
 
 .cta-button:hover {
-    background-color: var(--orange);
-    cursor: pointer;
-    transition: all 0.5s;
+    background-color: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 28, 81, 0.4);
 }
 
 .post-pet-section {
@@ -735,8 +751,8 @@ body {
 .post-pet-section h2 {
     font-family: "Varela Round", sans-serif;
     padding-bottom: 10px;
-    color: var(--orange);
-    border-bottom: 2px solid var(--orange);
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
     font-size: 32px;
     margin-bottom: 20px;
 }
@@ -756,14 +772,14 @@ body {
 
 .post-pet-section h3 {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
     font-size: 20px;
     margin-top: 20px;
 }
 
 .post-pet-section label {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
     font-weight: bold;
     display: block;
 }
@@ -805,14 +821,14 @@ body {
     border: none;
     padding: 8px 8px;
     color: var(--white);
-    background-color: var(--orange);
+    background-color: var(--primary);
 }
 
 .cta-button {
     display: inline-block;
     padding: 10px 16px;
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--primary);
+    color: var(--light);
     text-decoration: none;
     border-radius: 100px;
     font-weight: bold;
@@ -822,7 +838,7 @@ body {
 }
 
 .cta-button:hover {
-    background-color: var(--hoverorange);
+    background-color: var(--secondary);
     cursor: pointer;
     transition: all 0.5s;
 }
@@ -840,7 +856,7 @@ body {
     border: none;
     padding: 8px 20px;
     color: var(--white);
-    background-color: var(--orange);
+    background-color: var(--primary);
     cursor: pointer;
     transition: background-color 0.3s;
     max-width: 165px;
@@ -849,7 +865,7 @@ body {
 }
 
 .file-input-label:hover {
-    background-color: var(--hoverorange);
+    background-color: var(--accent);
 }
 
 .file-input {
@@ -891,7 +907,7 @@ body {
     border: none;
     padding: 8px 8px;
     color: var(--white);
-    background-color: var(--orange);
+    background-color: var(--primary);
 }
 
 .filter-selection select:active {
@@ -916,7 +932,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 10px 10px;
-    border: 1px solid var(--orange);
+    border: 1px solid var(--primary);
     width: 310px;
 }
 
@@ -937,14 +953,14 @@ body {
 
 .pet-card-details h2 {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
     text-align: center;
     margin: 5px 0;
 }
 
 .pet-card-details p {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
 }
 
 .show-interest-btn {
@@ -959,13 +975,13 @@ body {
     border-radius: 100px;
     border: none;
     padding: 8px 15px;
-    color: var(--white);
-    background-color: var(--orange);
+    color: var(--light);
+    background-color: var(--primary);
 }
 
 .show-interest-btn button:hover {
     cursor: pointer;
-    background-color: var(--hoverorange);
+    background-color: var(--accent);
 }
 
 .popup {
@@ -981,16 +997,20 @@ body {
 }
 
 .popup-content {
-    background-color: white;
+    background-color: var(--light);
     padding: 20px;
+    max-width: 80%;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
 }
 
 .close-btn {
-    background-color: #f81900;
+    background-color: var(--primary);
     border: none;
-    color: white;
+    color: var(--light);
     padding: 8px 15px;
     margin-top: 10px;
     cursor: pointer;
@@ -1010,7 +1030,7 @@ body {
     justify-content: space-between;
     flex-direction: row;
     margin: auto;
-    border: 1px solid var(--orange);
+    border: 1px solid var(--primary);
     width: 310px;
     height: 120px;
     margin-bottom: 17px;
@@ -1024,7 +1044,7 @@ body {
 
 .pet-info h2 {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
     text-align: center;
     margin: 5px 0;
 }
@@ -1039,7 +1059,7 @@ body {
 
 .pet-info p {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
 }
 
 .custom-adopt-form-container {
@@ -1050,8 +1070,8 @@ body {
 .custom-form-heading {
     font-family: "Varela Round", sans-serif;
     padding-bottom: 10px;
-    color: var(--orange);
-    border-bottom: 2px solid var(--orange);
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
     font-size: 32px;
     margin-bottom: 20px;
 }
@@ -1071,14 +1091,14 @@ body {
 
 .custom-form h3 {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
     font-size: 20px;
     margin-top: 20px;
 }
 
 .custom-label {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
     font-weight: bold;
     margin-bottom: 3px;
     display: block;
@@ -1102,8 +1122,8 @@ body {
 .custom-cta-button {
     display: inline-block;
     padding: 10px 16px;
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--primary);
+    color: var(--light);
     text-decoration: none;
     border-radius: 100px;
     font-weight: bold;
@@ -1112,7 +1132,7 @@ body {
 }
 
 .custom-cta-button:hover {
-    background-color: var(--hoverorange);
+    background-color: var(--accent);
     cursor: pointer;
     transition: all 0.5s;
 }
@@ -1175,9 +1195,10 @@ body {
 }
 
 .footer {
-    background-color: var(--textGrey);
-    color: var(--black);
-    padding-top: 20px;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: var(--light);
+    padding: 40px 0;
+    margin-top: 50px;
 }
 
 .footer-content {
@@ -1185,7 +1206,7 @@ body {
 }
 
 .mail-links {
-    color: var(--black);
+    color: var(--light);
     text-decoration: none;
 }
 
@@ -1194,22 +1215,18 @@ body {
 }
 
 .contact-links {
-    color: var(--black);
+    color: var(--light);
     text-decoration: none;
     padding: 5px;
 }
 
 .contact-links:hover {
-    background-color: var(--orange);
-    color: var(--white);
-    text-shadow: 2px 2px 2px var(--orange);
-    text-decoration: none;
-    border-radius: 20px;
+    color: var(--accent);
 }
 
 .below-footer {
-    background-color: var(--textGrey);
-    color: var(--black);
+    background-color: var(--primary);
+    color: var(--light);
     padding: 10px;
     text-align: center;
     line-height: 1.6;
@@ -1220,7 +1237,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--orange);
+    background-color: var(--primary);
     color: white;
     padding: 10px 20px;
 }
@@ -1236,7 +1253,7 @@ body {
 }
 
 .admin-footer {
-    background-color: var(--orange);
+    background-color: var(--primary);
     color: #fff;
     text-align: center;
     padding: 10px;
@@ -1253,7 +1270,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to bottom right, var(--hoverorange), var(--Lightorange));
+    background-image: linear-gradient(to bottom right, var(--secondary), var(--accent));
 }
 
 .login-container {
@@ -1264,14 +1281,14 @@ body {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--light);
     justify-content: center;
     align-items: center;
 }
 
 .login-container h2 {
     font-size: 1.5rem;
-    color: var(--orange);
+    color: var(--primary);
     margin-bottom: 10px;
 }
 
@@ -1279,16 +1296,16 @@ body {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--primary);
     border-radius: 5px;
 }
 
 .login-container input:focus {
-    border: 1px solid var(--orange);
+    border: 1px solid var(--accent);
 }
 
 .login-container button {
-    background-color: var(--orange);
+    background-color: var(--primary);
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -1298,11 +1315,11 @@ body {
 }
 
 .login-container button:hover {
-    background-color: var(--hoverorange);
+    background-color: var(--accent);
 }
 
 .error-message {
-    color: #ff0000;
+    color: var(--primary);
     font-size: 1rem;
     margin-bottom: 10px;
 }
@@ -1330,14 +1347,14 @@ body {
 .admin-screen-left p {
     font-weight: bold;
     font-size: large;
-    color: var(--orange);
+    color: var(--primary);
     font-family: "Varela Round", sans-serif;
     cursor: pointer;
     margin: 10px 0;
     display: flex;
     justify-content: flex-start;
     padding-bottom: 10px;
-    border-bottom: 2px solid var(--orange);
+    border-bottom: 2px solid var(--primary);
 }
 
 .admin-screen-left p:hover {
@@ -1345,7 +1362,7 @@ body {
 }
 
 .admin-screen-right {
-    border-left: 3px solid var(--orange);
+    border-left: 3px solid var(--primary);
     padding: 0 4vw;
     max-width: 80vw;
     min-width: 80vw;
@@ -1355,7 +1372,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 10px 10px;
-    border: 1px solid var(--orange);
+    border: 1px solid var(--primary);
     width: 310px;
     overflow: hidden;
 }
@@ -1377,14 +1394,14 @@ body {
 
 .pet-card-details h2 {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
     text-align: center;
     margin: 5px 0;
 }
 
 .pet-card-details p {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
 }
 
 .form-card-details {
@@ -1396,7 +1413,7 @@ body {
 
 .form-card-details h2 {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
     text-align: center;
     margin: 5px 0;
     overflow: hidden;
@@ -1406,7 +1423,7 @@ body {
 
 .form-card-details p {
     font-family: "Varela Round", sans-serif;
-    color: var(--orange);
+    color: var(--primary);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1424,8 +1441,8 @@ body {
     border-radius: 100px;
     border: none;
     padding: 8px 15px;
-    color: var(--white);
-    background-color: var(--orange);
+    color: var(--light);
+    background-color: var(--primary);
 }
 
 .app-rej-btn {
@@ -1440,19 +1457,19 @@ body {
     border-radius: 100px;
     border: none;
     padding: 8px 15px;
-    color: var(--white);
-    background-color: var(--orange);
+    color: var(--light);
+    background-color: var(--primary);
     min-width: 90px;
 }
 
 .show-interest-btn button:hover {
     cursor: pointer;
-    background-color: var(--hoverorange);
+    background-color: var(--accent);
 }
 
 .app-rej-btn button:hover {
     cursor: pointer;
-    background-color: var(--hoverorange);
+    background-color: var(--accent);
 }
 
 .popup {
@@ -1468,7 +1485,7 @@ body {
 }
 
 .popup-content {
-    background-color: white;
+    background-color: var(--light);
     padding: 20px;
     max-width: 80%;
     border-radius: 5px;
@@ -1479,9 +1496,9 @@ body {
 }
 
 .close-btn {
-    background-color: #ff1900;
+    background-color: var(--primary);
     border: none;
-    color: white;
+    color: var(--light);
     padding: 8px 15px;
     margin-top: 10px;
     cursor: pointer;
@@ -1522,7 +1539,7 @@ body {
 .clickable-pet-name {
     display: inline;
     cursor: pointer;
-    color: var(--orange);
+    color: var(--primary);
 }
 
 .req-filter-selection {
@@ -1530,13 +1547,13 @@ body {
     padding: 6px 5px;
     border-radius: 15px;
     color: var(--white);
-    background-color: var(--orange);
+    background-color: var(--primary);
     border: none;
 }
 
 .req-filter-selection:hover {
     cursor: pointer;
-    background-color: var(--hoverorange);
+    background-color: var(--accent);
     border: none;
 }
 
@@ -1560,7 +1577,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 50px 30px;
-  background-color: #f8f9fa;
+  background-color: var(--light);
 }
 
 .landing-content {
@@ -1571,14 +1588,14 @@ body {
 .landing-content h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: var(--darkGrey);
+  color: var(--primary);
   font-family: 'Preahvihear', sans-serif;
 }
 
 .landing-content p {
   margin-bottom: 30px;
   font-size: 1.1rem;
-  color: #666;
+  color: var(--primary);
   line-height: 1.6;
 }
 
@@ -1598,23 +1615,23 @@ body {
 }
 
 .primary-btn {
-  background-color: var(--orange);
-  color: white;
+  background-color: var(--primary);
+  color: var(--light);
 }
 
 .primary-btn:hover {
-  background-color: var(--hoverorange);
+  background-color: var(--accent);
 }
 
 .secondary-btn {
   background-color: transparent;
-  border: 2px solid var(--orange);
-  color: var(--orange);
+  border: 2px solid var(--primary);
+  color: var(--primary);
 }
 
 .secondary-btn:hover {
-  background-color: var(--orange);
-  color: white;
+  background-color: var(--primary);
+  color: var(--light);
 }
 
 .landing-image {
@@ -1644,7 +1661,7 @@ body {
 /* Planning to Adopt section */
 .planning-container {
   padding: 50px 30px;
-  background-color: #fff;
+  background-color: var(--light);
   text-align: center;
   max-width: 1200px;
   margin: 0 auto;
@@ -1653,7 +1670,7 @@ body {
 .planning-container h2 {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: var(--darkGrey);
+  color: var(--primary);
   font-family: 'Preahvihear', sans-serif;
 }
 
@@ -1665,13 +1682,13 @@ body {
 .planning-content p {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #666;
+  color: var(--primary);
 }
 
 /* Dark Grey Container */
 .dark-grey-container {
-  background-color: var(--darkGrey);
-  color: var(--textGrey);
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: var(--light);
   padding: 40px 30px;
   display: grid;
   grid-template-columns: auto 1fr auto 1fr;

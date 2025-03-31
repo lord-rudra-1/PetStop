@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../util/index');
 
-const Pet = sequelize.define('Pets', {
+const Pet = sequelize.define('pet', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -11,17 +11,30 @@ const Pet = sequelize.define('Pets', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  type: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  breed: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   age: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  area: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  justification: {
+  description: {
     type: DataTypes.TEXT,
-    allowNull: false
+    allowNull: true
+  },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'default-pet.jpg'
+  },
+  status: {
+    type: DataTypes.ENUM('Pending', 'Available', 'Approved', 'Adopted', 'In Care', 'Rejected'),
+    defaultValue: 'Pending'
   },
   email: {
     type: DataTypes.STRING,
@@ -34,22 +47,24 @@ const Pet = sequelize.define('Pets', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  type: {
+  // Additional fields for adoption information
+  adopter_name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
-  filename: {
+  adopter_email: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true,
+    validate: {
+      isEmail: true
+    }
   },
-  status: {
-    type: DataTypes.ENUM('Pending', 'Approved', 'Adopted'),
-    allowNull: false,
-    defaultValue: 'Pending'
+  adopter_phone: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 }, {
-  timestamps: true,
-  tableName: 'pets'
+  timestamps: true
 });
 
 module.exports = Pet; 

@@ -96,9 +96,59 @@ const deletePost = async (req, res) => {
   }
 };
 
+// New function to adopt a pet
+const adoptPet = async (req, res) => {
+  try {
+    const { id, adopter_name, adopter_phone } = req.body;
+    
+    const pet = await Pet.findByPk(id);
+    
+    if (!pet) {
+      return res.status(404).json({ error: 'Pet not found' });
+    }
+    
+    if (pet.status !== 'Available') {
+      return res.status(400).json({ error: 'This pet is not available for adoption' });
+    }
+    
+    // Update pet with adopter info
+    pet.status = 'Adopted';
+    pet.adopter_name = adopter_name;
+    pet.adopter_phone = adopter_phone;
+    
+    await pet.save();
+    
+    res.status(200).json({
+      message: 'Pet adopted successfully',
+      pet
+    });
+    
+  } catch (error) {
+    console.error('Error adopting pet:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Get all available pets for adoption
+const getAvailablePets = async (req, res) => {
+  try {
+    const pets = await Pet.findAll({
+      where: { status: 'Available' },
+      order: [['updatedAt', 'DESC']]
+    });
+    
+    res.status(200).json(pets);
+  } catch (error) {
+    console.error('Error fetching available pets:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   postPetRequest,
   approveRequest,
   deletePost,
-  allPets
+  allPets,
+  adoptPet,
+  getAvailablePets
 }; 

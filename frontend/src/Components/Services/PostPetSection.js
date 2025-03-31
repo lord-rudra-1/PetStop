@@ -15,13 +15,15 @@ const PostPetSection = () => {
   const [type, setType] = useState("None");
   const [picture, setPicture] = useState(null);
   const [fileName, setFileName] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     if (!isSubmitting) {
       setEmailError(false);
       setAgeError(false);
       setFormError(false);
+      setSubmitError("");
     }
   }, [isSubmitting]);
 
@@ -30,7 +32,7 @@ const PostPetSection = () => {
   };
 
   const isEmailValid = (email) => {
-    const emailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
   };
 
@@ -52,9 +54,7 @@ const PostPetSection = () => {
       !justification ||
       !email ||
       !phone ||
-      !fileName ||
-      type === "None" ||
-      ageError
+      type === "None"
     ) {
       setFormError(true);
       return;
@@ -66,6 +66,7 @@ const PostPetSection = () => {
     }
 
     setIsSubmitting(true);
+    setSubmitError("");
 
     const formData = new FormData();
     formData.append("name", name);
@@ -77,20 +78,23 @@ const PostPetSection = () => {
     formData.append("type", type);
 
     if (picture) {
-      formData.append("picture", picture);
+      formData.append("image", picture);
     }
 
     try {
-      const response = await fetch("http://localhost:4000/services", {
+      console.log("Submitting form to:", "http://localhost:5002/post-pet");
+      const response = await fetch("http://localhost:5002/post-pet", {
         method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const data = await response.json();
+        throw new Error(data.message || "Error submitting form");
       }
 
-      console.log("Form submitted successfully");
+      const data = await response.json();
+      console.log("Form submitted successfully", data);
 
       setEmailError(false);
       setFormError(false);
@@ -102,14 +106,15 @@ const PostPetSection = () => {
       setPhone("");
       setPicture(null);
       setFileName("");
+      setType("None");
       togglePopup();
     } catch (error) {
       console.error("Error submitting form:", error);
+      setSubmitError(error.message || "Failed to submit. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
-
 
   return (
     <section className="post-pet-section">
@@ -151,7 +156,7 @@ const PostPetSection = () => {
         </div>
 
         <div className="input-box">
-          <label>Location:</label>
+          <label>Breed/Location:</label>
           <input
             type="text"
             value={area}
@@ -165,7 +170,7 @@ const PostPetSection = () => {
             value={type}
             onChange={(event) => setType(event.target.value)}
           >
-            <option value="None">None</option>
+            <option value="None">Select Type</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
             <option value="Rabbit">Rabbit</option>
@@ -176,11 +181,12 @@ const PostPetSection = () => {
         </div>
 
         <div className="input-box">
-          <h3>Justification for giving a pet</h3>
+          <h3>Pet Description</h3>
           <textarea
             rows="4"
             value={justification}
             onChange={(e) => setJustification(e.target.value)}
+            placeholder="Describe your pet and why you're giving it up for adoption"
           ></textarea>
         </div>
 
@@ -196,7 +202,7 @@ const PostPetSection = () => {
         </div>
 
         <div className="input-box">
-          <label>Ph.No:</label>
+          <label>Phone Number:</label>
           <input
             type="tel"
             value={phone}
@@ -208,7 +214,10 @@ const PostPetSection = () => {
           <p className="error-message">Please provide a valid email address.</p>
         )}
         {formError && (
-          <p className="error-message">Please fill out all fields correctly.</p>
+          <p className="error-message">Please fill out all required fields.</p>
+        )}
+        {submitError && (
+          <p className="error-message">{submitError}</p>
         )}
 
         <button type="submit" className="cta-button" disabled={isSubmitting}>
@@ -218,7 +227,7 @@ const PostPetSection = () => {
         {showPopup && (
           <div className="popup">
             <div className="popup-content">
-              <h4>Application Submitted; we'll get in touch with you soon.</h4>
+              <h4>Application Submitted! We'll review your pet for adoption soon.</h4>
             </div>
             <button onClick={togglePopup} className="close-btn">
               Close <i className="fa fa-times"></i>

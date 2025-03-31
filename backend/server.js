@@ -8,11 +8,12 @@ const sequelize = require('./util/index');
 const Pet = require('./models/Pet');
 const AdoptForm = require('./models/AdoptForm');
 const Admin = require('./models/Admin');
+const PetCare = require('./models/PetCare');
 
 // Initialize models and their relationships
 (async () => {
   try {
-    await sequelize.sync({ force: false }); // Set force: true to recreate tables
+    await sequelize.sync({ force: false, alter: true }); // Set force: true to recreate tables
     console.log("Database synced successfully!");
     
     // Create default admin if needed
@@ -31,19 +32,27 @@ const Admin = require('./models/Admin');
 
 const app = express();
 
+// CORS configuration
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:5173'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 // Middleware
-app.use(cors());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Import routes - update to use SQL versions
 const petRouter = require('./Routes/PetRouteSQL');
+const petCareRouter = require('./Routes/PetCareRoutes');
 const AdoptFormRoute = require('./Routes/AdoptFormRouteSQL');
 const AdminRoute = require('./Routes/AdminRouteSQL');
 
 // Use routes
 app.use(petRouter);
+app.use('/care', petCareRouter);
 app.use('/form', AdoptFormRoute);
 app.use('/admin', AdminRoute);
 

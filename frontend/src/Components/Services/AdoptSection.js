@@ -12,7 +12,7 @@ const AdoptSection = () => {
       <h2>Adopt a Pet</h2>
       <img src={adoptPet} alt="Happy Pet" />
 
-      <p>
+      <p> 
         Welcome to our pet adoption program! Adopting a pet is a wonderful way
         to bring joy and companionship into your life.
       </p>

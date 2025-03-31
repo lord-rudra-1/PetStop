@@ -15,6 +15,7 @@ const LeavePetCareSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [isTypeSelected, setIsTypeSelected] = useState(false);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -41,6 +42,7 @@ const LeavePetCareSection = () => {
     setIsSubmitting(true);
     setFormError(false);
     setEmailError(false);
+    setIsTypeSelected(true);
 
     try {
       const response = await fetch("http://localhost:5002/leave-pet-care", {
@@ -117,15 +119,18 @@ const LeavePetCareSection = () => {
             value={petType}
             onChange={(e) => setPetType(e.target.value)}
             required
+            disabled={isTypeSelected}
           >
-            <option value="">Select Type</option>
+            <option value="None" disabled>Select Pet Type</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
             <option value="Rabbit">Rabbit</option>
             <option value="Bird">Bird</option>
             <option value="Fish">Fish</option>
             <option value="Other">Other</option>
+            
           </select>
+          
         </div>
 
         <div className="input-box">

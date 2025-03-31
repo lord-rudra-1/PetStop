@@ -18,6 +18,7 @@ const PostPetSection = () => {
   const [fileName, setFileName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [isTypeSelected, setIsTypeSelected] = useState(false);
 
   useEffect(() => {
     if (!isSubmitting) {
@@ -68,6 +69,7 @@ const PostPetSection = () => {
 
     setIsSubmitting(true);
     setSubmitError("");
+    setIsTypeSelected(true);
 
     const formData = new FormData();
     formData.append("name", name);
@@ -161,8 +163,9 @@ const PostPetSection = () => {
             value={type}
             onChange={(event) => setType(event.target.value)}
             required
+            disabled={isTypeSelected}
           >
-            <option value="">Select Type</option>
+            <option value="None" disabled>Select Pet Type</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
             <option value="Rabbit">Rabbit</option>
@@ -170,6 +173,7 @@ const PostPetSection = () => {
             <option value="Fish">Fish</option>
             <option value="Other">Other</option>
           </select>
+          
         </div>
 
         <div className="input-box">

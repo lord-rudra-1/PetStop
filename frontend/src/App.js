@@ -12,9 +12,9 @@ import "./App.css";
 
 const Layout = ({ children }) => (
   <>
-    <Navbar title="PawFinds" />
+    <Navbar title="PetStop" />
     {children}
-    <Footer title="PawFinds" />
+    <Footer title="PetStop" />
   </>
 );
 

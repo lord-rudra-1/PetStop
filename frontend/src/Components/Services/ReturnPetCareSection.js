@@ -73,12 +73,11 @@ const ReturnPetCareSection = () => {
 
   return (
     <section className="service-section">
-      <h2>Return Your Pet</h2>
+      <h2>Return Pet Care</h2>
       <img src={returnPetCare} alt="Pet Return Service" />
 
       <p>
-        Ready to welcome your pet back home? Let us know when you'd like to pick up
-        your beloved companion. We'll make sure everything is ready for a smooth return.
+      Excited to reunite with your furry friend? Let us know your preferred pickup time, and we’ll ensure everything is perfectly prepared for a seamless homecoming!
       </p>
 
       <form onSubmit={handleSubmit} className="service-form">

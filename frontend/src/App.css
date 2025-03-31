@@ -1383,10 +1383,14 @@ body {
 
 .error-message {
     color: var(--primary);
-    font-size: 1rem;
-    margin-bottom: 10px;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
 }
 
+.error-message.visible {
+    display: block;
+}
 
 .admin-screen-container {
     display: flex;

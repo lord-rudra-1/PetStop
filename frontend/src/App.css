@@ -215,7 +215,7 @@ body {
         font-size: 62px;
         display: inline;
         font-weight: bold;
-        color: var(--primary);
+        color: var(--light);
         letter-spacing: -1px;
     }
 }
@@ -233,8 +233,8 @@ body {
 }
 
 .we-do {
-    color: var(--primary);
-    margin-bottom: 20px;
+    color: var(--light);
+    margin-bottom: 10px;
     font-weight: bold;
     font-size: 38px;
     letter-spacing: -0.5px;
@@ -646,12 +646,15 @@ body {
     line-height: 1.2;
     text-align: right;
     padding-right: 40px;
-    margin-top: -90px;
+    margin-top: -110px;
 }
 
 .adopted-pets-num {
-    font-size: 40px;
+    font-size: 62px;
     display: inline;
+    font-weight: bold;
+    color: var(--light);
+    letter-spacing: -1px;
 }
 
 .right-pic>img {
@@ -669,13 +672,16 @@ body {
     text-align: left;
     padding-right: 30px;
     padding-left: 10px;
-    margin-top: -100px;
+    margin-top: -130px;
 }
 
 .we-do {
-    color: var(--primary);
+    
+    color: var(--light);
     margin-bottom: 10px;
     font-weight: bold;
+    font-size: 38px;
+    letter-spacing: -0.5px;
 }
 
 
@@ -870,8 +876,15 @@ body {
     border-radius: 100px;
     border: none;
     padding: 8px 8px;
-    color: var(--white);
-    background-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--light);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.filter-selection-service select:hover {
+    background-color: var(--accent);
+    color: var(--light);
 }
 
 .cta-button {
@@ -1370,10 +1383,14 @@ body {
 
 .error-message {
     color: var(--primary);
-    font-size: 1rem;
-    margin-bottom: 10px;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
 }
 
+.error-message.visible {
+    display: block;
+}
 
 .admin-screen-container {
     display: flex;

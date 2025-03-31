@@ -1,6 +1,7 @@
 import React from "react";
 import HomeDarkCardLeftPic from "./images/HomeDarkCardLeftPic.png";
 import HomeDarkCardRightPic from "./images/HomeDarkCardRightPic.png";
+import girlHoldingADog from "./images/girlHoldingADog.png";
 
 // Card component
 const Card = ({ imgSrc, title, content }) => {
@@ -26,7 +27,7 @@ const HomeLandingContainer = ({ description }) => {
         </div>
       </div>
       <div className="landing-image">
-        <img src={require('./images/HomeLandingImg.png')} alt="Happy pet with owner" />
+        <img src={girlHoldingADog} alt="Happy pet with owner" />
       </div>
     </div>
   );

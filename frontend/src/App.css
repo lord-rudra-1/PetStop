@@ -1553,3 +1553,139 @@ body {
     margin-right: 4px;
     transition: all 0.3s ease;
 }
+
+/* Add new Home Landing Container styles */
+.home-landing-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 30px;
+  background-color: #f8f9fa;
+}
+
+.landing-content {
+  width: 50%;
+  padding-right: 20px;
+}
+
+.landing-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: var(--darkGrey);
+  font-family: 'Preahvihear', sans-serif;
+}
+
+.landing-content p {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 15px;
+}
+
+.primary-btn, .secondary-btn {
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Oxygen', sans-serif;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background-color: var(--orange);
+  color: white;
+}
+
+.primary-btn:hover {
+  background-color: var(--hoverorange);
+}
+
+.secondary-btn {
+  background-color: transparent;
+  border: 2px solid var(--orange);
+  color: var(--orange);
+}
+
+.secondary-btn:hover {
+  background-color: var(--orange);
+  color: white;
+}
+
+.landing-image {
+  width: 45%;
+}
+
+.landing-image img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .home-landing-container {
+    flex-direction: column;
+    padding: 30px 20px;
+  }
+  
+  .landing-content, .landing-image {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+}
+
+/* Planning to Adopt section */
+.planning-container {
+  padding: 50px 30px;
+  background-color: #fff;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.planning-container h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--darkGrey);
+  font-family: 'Preahvihear', sans-serif;
+}
+
+.planning-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.planning-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Dark Grey Container */
+.dark-grey-container {
+  background-color: var(--darkGrey);
+  color: var(--textGrey);
+  padding: 40px 30px;
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  grid-gap: 20px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .dark-grey-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .left-pic, .right-pic {
+    margin: 0 auto;
+  }
+}

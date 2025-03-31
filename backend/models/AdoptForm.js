@@ -1,16 +1,19 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
-const Pet = require('./PetModelSQL');
+const sequelize = require('../util/index');
+const Pet = require('./Pet');
 
-const AdoptForm = sequelize.define('AdoptForm', {
+const AdoptForm = sequelize.define('AdoptForms', {
   id: {
     type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: true
+    }
   },
   phoneNo: {
     type: DataTypes.STRING,
@@ -21,7 +24,7 @@ const AdoptForm = sequelize.define('AdoptForm', {
     allowNull: false
   },
   previousExperience: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false
   },
   familyComposition: {
@@ -30,18 +33,19 @@ const AdoptForm = sequelize.define('AdoptForm', {
   },
   petId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
     references: {
       model: Pet,
       key: 'id'
-    }
+    },
+    allowNull: false
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  tableName: 'adopt_forms'
 });
 
-// Create association
-AdoptForm.belongsTo(Pet, { foreignKey: 'petId' });
-Pet.hasMany(AdoptForm, { foreignKey: 'petId' });
+// Create associations
+AdoptForm.belongsTo(Pet, { foreignKey: 'petId', onDelete: 'CASCADE' });
+Pet.hasMany(AdoptForm, { foreignKey: 'petId', onDelete: 'CASCADE' });
 
 module.exports = AdoptForm; 

@@ -17,10 +17,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "node setup-mysql.js",
+    "seed": "node backend/seed.js",
     "frontend": "cd frontend && react-scripts start",
     "backend": "cd backend && nodemon server.js",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "start": "concurrently \"npm run backend\" \"npm run frontend\""
+    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "seed-data": "node backend/seed-data.js",
+    "seed-db": "node backend/seed-db.js"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^6.6.3",

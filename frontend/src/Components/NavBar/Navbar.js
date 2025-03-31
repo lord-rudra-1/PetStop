@@ -7,7 +7,7 @@ const Navbar = (props) => {
     <div className="navbar-container">
       <div>
         <Link className="logo-container" to="/">
-          <img className="navbar-logo" src={logo} alt="PawFinds Logo" />
+          <img className="navbar-logo" src={logo} alt="PetStop Logo" />
           <p>{props.title}</p>
         </Link>
       </div>

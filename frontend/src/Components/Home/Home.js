@@ -19,8 +19,8 @@ const HomeLandingContainer = ({ description }) => {
   return (
     <div className="home-landing-container">
       <div className="landing-content">
-        <h1>Find Your New Best Friend</h1>
-        <p>{description}</p>
+        <h1>Give Love, Get Love – Adopt a Pet Today!</h1>
+        <p >{description}</p>
         <div className="buttons-container">
           <button className="primary-btn">Adopt Now</button>
           <button className="secondary-btn">Learn More</button>

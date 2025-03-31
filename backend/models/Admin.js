@@ -1,11 +1,11 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const sequelize = require('../util/index');
 
-const Admin = sequelize.define('Admin', {
+const Admin = sequelize.define('Admins', {
   id: {
     type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   username: {
     type: DataTypes.STRING,
@@ -17,7 +17,8 @@ const Admin = sequelize.define('Admin', {
     allowNull: false
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  tableName: 'admins'
 });
 
 module.exports = Admin; 

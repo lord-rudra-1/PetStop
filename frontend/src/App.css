@@ -43,7 +43,7 @@ body {
 .logo-container>p {
     font-family: 'Oxygen', sans-serif;
     margin-left: 10px;
-    font-size: 29px;
+    font-size: 32px;
 }
 
 .navbar-links li {
@@ -54,10 +54,10 @@ body {
 .navbar-links li>* {
     text-decoration: none;
     border: 2px var(--light) solid;
-    padding: 5px 15px;
+    padding: 8px 20px;
     font-family: 'Oxygen', sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 18px;
     border-radius: 20px;
     color: var(--light);
     transition: all 0.3s ease;
@@ -86,48 +86,73 @@ body {
     width: 100vw;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     background-color: var(--light);
+    margin-top: -30px;
 }
 
 .homeContainer-left {
     width: 60vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-right: 40px;
+    margin-top: -20px;
 }
 
 .home-title {
     color: var(--primary);
-    font-size: 70px;
+    font-size: 100px;
     line-height: 1.2;
     font-weight: bold;
     font-family: 'Preahvihear', sans-serif;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
 }
 
 .home-titlePlusPng {
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
+    margin-bottom: 20px;
 }
 
 .home-titlePlusPng>img {
-    width: 80px;
-    margin-left: 10px;
+    width: 100px;
+    margin-left: 20px;
 }
 
 .home-second-para {
-    font-size: 18px;
+    font-size: 32px;
     color: var(--primary);
     margin: 20px 0px 20px 0px;
+    line-height: 1.6;
+    font-weight: 500;
+    max-width: 800px;
+    text-align: left;
 }
 
 .homeContainer-right {
-    padding-left: 40PX;
+    padding-left: 40px;
     width: 35vw;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    margin-top: -20px;
+}
+
+.homeContainer-right img {
+    width: 100%;
+    max-width: 400px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(33, 15, 55, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.homeContainer-right img:hover {
+    transform: scale(1.02);
 }
 
 .adopt-btn>* {
@@ -139,22 +164,26 @@ body {
     justify-content: center;
     align-items: center;
     border: 2px var(--primary) solid;
-    height: 42px;
-    width: 145px;
+    height: 65px;
+    width: 220px;
     font-weight: bold;
-    font-size: 15px;
-    border-radius: 20px;
+    font-size: 24px;
+    border-radius: 35px;
     background-color: var(--primary);
     color: var(--light);
     box-shadow: 1.5px 1.5px 3px var(--primary);
     font-family: 'Preahvihear', sans-serif;
     transition: all 0.3s ease;
+    padding: 0 25px;
+    letter-spacing: 0.5px;
 }
 
 .Home-button:hover {
     border: 2px var(--secondary) solid;
     background-color: var(--secondary);
     color: var(--light);
+    transform: scale(1.05);
+    box-shadow: 2px 2px 5px var(--accent);
     cursor: pointer;
 }
 
@@ -166,12 +195,12 @@ body {
 }
 
 .planning-container {
-    padding: 20px;
+    padding: 40px;
     margin-top: 30px;
     border-radius: 40px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     background: linear-gradient(135deg, var(--light), var(--accent));
     box-shadow: 0 4px 15px rgba(165, 91, 75, 0.2);
 }
@@ -183,28 +212,50 @@ body {
 
 .left-para {
     .adopted-pets-num {
-        font-size: 40px;
+        font-size: 62px;
         display: inline;
+        font-weight: bold;
+        color: var(--primary);
+        letter-spacing: -1px;
     }
 }
 
 .right-para {
     width: 26vw;
-    color: var(--textGrey);
-    font-size: 17px;
+    color: var(--primary);
+    font-size: 28px;
     font-family: 'Preahvihear', sans-serif;
-    line-height: 1.2;
+    line-height: 1.6;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    text-align: left;
+    margin-top: 20px;
 }
 
 .we-do {
     color: var(--primary);
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-weight: bold;
+    font-size: 38px;
+    letter-spacing: -0.5px;
 }
 
 .card-container h2 {
+    color: var(--primary);
+    text-align: center;
+    padding: 35px 0px 35px 0px;
+    font-size: 38px;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+}
+
+.card-container p {
+    text-align: center;
     font-size: 20px;
-    margin-top: 20px;
+    color: var(--primary);
+    line-height: 1.6;
+    font-weight: 500;
+    letter-spacing: 0.2px;
 }
 
 .adopt-section img {
@@ -214,14 +265,11 @@ body {
     margin-bottom: 20px;
 }
 
-.adopt-section ul {
+.adopt-section ul, .adopt-section ol {
     font-family: "Varela Round", sans-serif;
-}
-
-.adopt-section ol {
-    font-family: "Varela Round", sans-serif;
-    color: var(--darkGrey);
-    list-style: none;
+    color: var(--primary);
+    font-size: 18px;
+    line-height: 1.6;
     padding-left: 20px;
 }
 
@@ -375,7 +423,7 @@ body {
 .logo-container>p {
     font-family: 'Oxygen', sans-serif;
     margin-left: 10px;
-    font-size: 29px;
+    font-size: 32px;
 }
 
 .navbar-links li {
@@ -386,10 +434,10 @@ body {
 .navbar-links li>* {
     text-decoration: none;
     border: 2px var(--light) solid;
-    padding: 5px 15px;
+    padding: 8px 20px;
     font-family: 'Oxygen', sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 18px;
     border-radius: 20px;
     color: var(--light);
 }
@@ -403,23 +451,23 @@ body {
 
 .Navbar-button {
     border: 2px var(--primary) solid;
-    height: 42px;
-    width: 105px;
+    height: 48px;
+    width: 120px;
     font-family: 'Oxygen', sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 18px;
     border-radius: 20px;
     background-color: var(--primary);
     color: var(--light);
     box-shadow: 1.5px 1.5px 3px var(--primary);
-    transition: all 0.3s ease; 
+    transition: all 0.3s ease;
 }
 
 .Navbar-button:hover {
     border: 2px var(--secondary) solid;
     background-color: var(--secondary);
     color: var(--light);
-    transform: scale(1.05); 
+    transform: scale(1.05);
     box-shadow: 2px 2px 5px var(--accent);
     animation: bounce 0.5s ease;
     cursor: pointer;
@@ -453,14 +501,18 @@ body {
     width: 100vw;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    background-color: var(--light);
+    margin-top: -30px;
 }
 
 .homeContainer-left {
     width: 60vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-right: 40px;
+    margin-top: -20px;
 }
 
 .home-title {
@@ -698,28 +750,23 @@ body {
 
 .adopt-section p {
     font-family: "Varela Round", sans-serif;
-    color: var(--darkGrey);
-    font-size: 16px;
+    color: var(--primary);
+    font-size: 18px;
     margin-bottom: 20px;
+    line-height: 1.6;
 }
 
 .adopt-section h3 {
     color: var(--primary);
-    font-size: 20px;
+    font-size: 22px;
     margin-top: 20px;
 }
 
-.adopt-section ul {
+.adopt-section ul, .adopt-section ol {
     font-family: "Varela Round", sans-serif;
-    color: var(--darkGrey);
-    list-style: none;
-    padding-left: 20px;
-}
-
-.adopt-section ol {
-    font-family: "Varela Round", sans-serif;
-    color: var(--darkGrey);
-    list-style: none;
+    color: var(--primary);
+    font-size: 18px;
+    line-height: 1.6;
     padding-left: 20px;
 }
 
@@ -765,15 +812,16 @@ body {
 
 .post-pet-section p {
     font-family: "Varela Round", sans-serif;
-    color: var(--darkGrey);
-    font-size: 16px;
+    color: var(--primary);
+    font-size: 18px;
     margin-bottom: 20px;
+    line-height: 1.6;
 }
 
 .post-pet-section h3 {
     font-family: "Varela Round", sans-serif;
     color: var(--primary);
-    font-size: 20px;
+    font-size: 22px;
     margin-top: 20px;
 }
 
@@ -1594,7 +1642,7 @@ body {
 
 .landing-content p {
   margin-bottom: 30px;
-  font-size: 1.1rem;
+  font-size: 18px;
   color: var(--primary);
   line-height: 1.6;
 }
@@ -1680,7 +1728,7 @@ body {
 }
 
 .planning-content p {
-  font-size: 1.1rem;
+  font-size: 18px;
   line-height: 1.6;
   color: var(--primary);
 }

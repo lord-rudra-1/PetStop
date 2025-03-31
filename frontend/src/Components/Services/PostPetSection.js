@@ -143,20 +143,7 @@ const PostPetSection = () => {
           />
         </div>
 
-        <div className="input-box">
-          <label>Pet Picture:</label>
-          <label className="file-input-label">
-            <span className="file-input-text">
-              {fileName || "Choose a Picture"}
-            </span>
-            <input
-              className="file-input"
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-            />
-          </label>
-        </div>
+        
 
         <div className="input-box">
           <label>Breed/Location:</label>

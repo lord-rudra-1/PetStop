@@ -118,7 +118,7 @@ const LeavePetCareSection = () => {
             onChange={(e) => setPetType(e.target.value)}
             required
           >
-            <option value="None" disabled>Select Pet Type</option>
+            <option value="">Select Type</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
             <option value="Rabbit">Rabbit</option>

@@ -1,123 +1,160 @@
-import React, { useState, useEffect } from "react";
-import returnPetImg from "./images/returnPet.png";
+import React, { useState } from "react";
+import returnPetCare from "./images/returnPetCare.png";
+import './ServiceSections.css';
 
 const ReturnPetCareSection = () => {
-  const [petsInCare, setPetsInCare] = useState([]);
-  const [selectedPetCare, setSelectedPetCare] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [petName, setPetName] = useState("");
+  const [returnDate, setReturnDate] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState(false);
-
-  useEffect(() => {
-    fetchPetsInCare();
-  }, []);
-
-  const fetchPetsInCare = async () => {
-    try {
-      const response = await fetch("http://localhost:5002/care/pets-in-care");
-      if (response.ok) {
-        const data = await response.json();
-        setPetsInCare(data);
-      } else {
-        console.error("Failed to fetch pets in care");
-      }
-    } catch (error) {
-      console.error("Error fetching pets in care:", error);
-    }
-  };
+  const [emailError, setEmailError] = useState(false);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
 
+  const isEmailValid = (email) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectedPetCare) {
+    if (!name || !email || !phone || !petName || !returnDate) {
       setFormError(true);
       return;
     }
 
+    if (!isEmailValid(email)) {
+      setEmailError(true);
+      return;
+    }
+
     setIsSubmitting(true);
+    setFormError(false);
+    setEmailError(false);
 
     try {
-      const response = await fetch(`http://localhost:5002/care/return-pet/${selectedPetCare}`, {
-        method: "PUT",
+      const response = await fetch("http://localhost:5002/return-pet-care", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          petName,
+          returnDate,
+        }),
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error("Failed to submit form");
       }
 
-      console.log("Pet returned successfully");
-      setFormError(false);
-      setSelectedPetCare("");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setPetName("");
+      setReturnDate("");
       togglePopup();
-      // Refresh the list after successful return
-      fetchPetsInCare();
     } catch (error) {
-      console.error("Error returning pet:", error);
+      console.error("Error submitting form:", error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="return-pet-care-section">
-      <h2>Take Your Pet Back from Care</h2>
-      <img src={returnPetImg} alt="Return Pet from Care" />
+    <section className="service-section">
+      <h2>Return Your Pet</h2>
+      <img src={returnPetCare} alt="Pet Return Service" />
 
       <p>
-        Ready to reunite with your furry friend? We've taken good care of them,
-        and they're excited to see you again!
+        Ready to welcome your pet back home? Let us know when you'd like to pick up
+        your beloved companion. We'll make sure everything is ready for a smooth return.
       </p>
 
-      {petsInCare.length === 0 ? (
-        <div className="no-pets-message">
-          <h3>No pets are currently in our care.</h3>
-          <p>If you need pet care services, please use our "Leave in Our Care" service.</p>
+      <form onSubmit={handleSubmit} className="service-form">
+        <div className="input-box">
+          <label>Your Name:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your full name"
+          />
         </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <div className="input-box">
-            <label>Select Your Pet to Return:</label>
-            <select
-              value={selectedPetCare}
-              onChange={(e) => setSelectedPetCare(e.target.value)}
-              required
-            >
-              <option value="">Select a pet</option>
-              {petsInCare.map((petCare) => (
-                <option key={petCare.id} value={petCare.id}>
-                  {petCare.pet.name} ({petCare.pet.type}) - Left on {new Date(petCare.startDate).toLocaleDateString()}
-                </option>
-              ))}
-            </select>
-          </div>
 
-          {formError && (
-            <p className="error-message">Please select a pet to return from care.</p>
-          )}
+        <div className="input-box">
+          <label>Pet Name:</label>
+          <input
+            type="text"
+            value={petName}
+            onChange={(e) => setPetName(e.target.value)}
+            placeholder="Enter your pet's name"
+          />
+        </div>
 
-          <button type="submit" className="cta-button" disabled={isSubmitting}>
-            {isSubmitting ? "Processing..." : "Return Pet from Care"}
-          </button>
+        <div className="input-box">
+          <label>Return Date:</label>
+          <input
+            type="date"
+            value={returnDate}
+            onChange={(e) => setReturnDate(e.target.value)}
+            min={new Date().toISOString().split('T')[0]}
+          />
+        </div>
 
-          {showPopup && (
-            <div className="popup">
-              <div className="popup-content">
-                <h4>Your pet has been successfully returned from our care. We hope they enjoyed their stay!</h4>
-              </div>
-              <button onClick={togglePopup} className="close-btn">
-                Close <i className="fa fa-times"></i>
-              </button>
+        <div className="input-box">
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+          />
+        </div>
+
+        <div className="input-box">
+          <label>Phone Number:</label>
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="Enter your phone number"
+          />
+        </div>
+
+        {emailError && (
+          <p className="error-message">Please provide a valid email address.</p>
+        )}
+        {formError && (
+          <p className="error-message">Please fill out all required fields.</p>
+        )}
+
+        <button type="submit" className="cta-button" disabled={isSubmitting}>
+          {isSubmitting ? "Submitting..." : "Submit Return Request"}
+        </button>
+
+        {showPopup && (
+          <div className="popup">
+            <div className="popup-content">
+              <h4>Return Request Submitted!</h4>
+              <p>We'll contact you shortly to confirm your pet's return.</p>
             </div>
-          )}
-        </form>
-      )}
+            <button onClick={togglePopup} className="close-btn">
+              Close <i className="fa fa-times"></i>
+            </button>
+          </div>
+        )}
+      </form>
     </section>
   );
 };

@@ -655,7 +655,7 @@ body {
 }
 
 .right-pic>img {
-    height: 200px;
+    height: 250px;
     position: relative;
     bottom: 15px;
 }
@@ -669,7 +669,7 @@ body {
     text-align: left;
     padding-right: 30px;
     padding-left: 10px;
-    margin-top: -80px;
+    margin-top: -100px;
 }
 
 .we-do {

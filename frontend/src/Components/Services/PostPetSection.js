@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import postPet from "./images/postPet.png";
+import './ServiceSections.css';
 
 const PostPetSection = () => {
   const [name, setName] = useState("");
@@ -117,17 +118,18 @@ const PostPetSection = () => {
   };
 
   return (
-    <section className="post-pet-section">
-      <h2>Post a Pet for Adoption</h2>
+    <section className="service-section">
+      <h2>Leave a Pet for Adoption</h2>
       <img src={postPet} alt="Pet Looking for a Home" />
 
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <form onSubmit={handleSubmit} encType="multipart/form-data" className="service-form">
         <div className="input-box">
-          <label>Name:</label>
+          <label>Pet Name:</label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your pet's name"
           />
         </div>
 
@@ -137,11 +139,12 @@ const PostPetSection = () => {
             type="text"
             value={age}
             onChange={(e) => {setAge(e.target.value);}}
+            placeholder="Enter your pet's age"
           />
         </div>
 
         <div className="input-box">
-          <label>Picture:</label>
+          <label>Pet Picture:</label>
           <label className="file-input-label">
             <span className="file-input-text">
               {fileName || "Choose a Picture"}
@@ -161,16 +164,18 @@ const PostPetSection = () => {
             type="text"
             value={area}
             onChange={(e) => setArea(e.target.value)}
+            placeholder="Enter breed or location"
           />
         </div>
 
         <div className="filter-selection-service">
-          <label>Type:</label>
+          <label>Pet Type:</label>
           <select
             value={type}
             onChange={(event) => setType(event.target.value)}
+            required
           >
-            <option value="None">Select Type</option>
+            <option value="None" disabled>Select Pet Type</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
             <option value="Rabbit">Rabbit</option>
@@ -178,12 +183,14 @@ const PostPetSection = () => {
             <option value="Fish">Fish</option>
             <option value="Other">Other</option>
           </select>
+          {type === "None" && (
+            <p className="error-message">Please select a pet type</p>
+          )}
         </div>
 
         <div className="input-box">
-          <h3>Pet Description</h3>
+          <label>Pet Description:</label>
           <textarea
-            rows="4"
             value={justification}
             onChange={(e) => setJustification(e.target.value)}
             placeholder="Describe your pet and why you're giving it up for adoption"
@@ -195,9 +202,10 @@ const PostPetSection = () => {
         <div className="input-box">
           <label>Email:</label>
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
           />
         </div>
 
@@ -207,6 +215,7 @@ const PostPetSection = () => {
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+            placeholder="Enter your phone number"
           />
         </div>
 
@@ -227,7 +236,8 @@ const PostPetSection = () => {
         {showPopup && (
           <div className="popup">
             <div className="popup-content">
-              <h4>Application Submitted! We'll review your pet for adoption soon.</h4>
+              <h4>Application Submitted!</h4>
+              <p>We'll review your pet for adoption soon.</p>
             </div>
             <button onClick={togglePopup} className="close-btn">
               Close <i className="fa fa-times"></i>

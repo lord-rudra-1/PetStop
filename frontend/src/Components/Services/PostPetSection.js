@@ -162,7 +162,7 @@ const PostPetSection = () => {
             onChange={(event) => setType(event.target.value)}
             required
           >
-            <option value="None" disabled>Select Pet Type</option>
+            <option value="">Select Type</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
             <option value="Rabbit">Rabbit</option>
@@ -170,9 +170,6 @@ const PostPetSection = () => {
             <option value="Fish">Fish</option>
             <option value="Other">Other</option>
           </select>
-          {type === "None" && (
-            <p className="error-message">Please select a pet type</p>
-          )}
         </div>
 
         <div className="input-box">

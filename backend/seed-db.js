@@ -1,23 +1,12 @@
 const sequelize = require('./util/index');
 const Pet = require('./models/Pet');
 const AdoptForm = require('./models/AdoptForm');
-const Admin = require('./models/Admin');
 
 (async () => {
     try {
-        await sequelize.sync({ force: false }); // Set force: true to recreate tables
+        await sequelize.sync({ force: false });
         console.log("Database synced successfully!");
-        
-        // Create admin if not exists
-        const adminExists = await Admin.findOne({ where: { username: 'admin' } });
-        if (!adminExists) {
-            await Admin.create({
-                username: 'admin',
-                password: 'admin123'
-            });
-            console.log('Default admin created');
-        }
-        
+
         // Create sample pets if none exist
         const petCount = await Pet.count();
         if (petCount === 0) {
@@ -74,7 +63,6 @@ const Admin = require('./models/Admin');
                 console.log('Sample adoption form created');
             }
         }
-        
         console.log('Database seeding completed successfully!');
     } catch (error) {
         console.error("Error seeding database:", error);

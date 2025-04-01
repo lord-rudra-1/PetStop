@@ -67,7 +67,6 @@ exports.postPetRequest = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
-  console.error('Error updating pet status:', error);
 
 
 // Delete a pet post

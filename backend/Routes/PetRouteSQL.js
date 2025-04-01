@@ -5,6 +5,8 @@ const path = require('path');
 const fs = require('fs');
 const petController = require('../controllers/PetControllerSQL');
 const Pet = require('../models/Pet');
+const sequelize = require('../util/index');
+const { Op } = require('sequelize');
 
 // Ensure images directory exists
 const imagesDir = path.join(__dirname, '../images');
@@ -115,15 +117,21 @@ router.post('/test-form-upload', handleUpload, (req, res) => {
 // Add a route for approvedPets to maintain compatibility with frontend
 router.get('/approvedPets', async (req, res) => {
   try {
-    console.log('Fetching all pets for display on pets page');
+    console.log('Fetching pets for display on pets page (excluding In Care pets)');
     
-    // Fetch ALL pets without filtering
-    const pets = await Pet.findAll();
+    // Fetch pets that are not in care
+    const pets = await Pet.findAll({
+      where: {
+        status: {
+          [Op.notIn]: ['In Care', 'in care'] // Exclude both variations of the status
+        }
+      }
+    });
     
-    console.log(`Found ${pets.length} total pets in database`);
+    console.log(`Found ${pets.length} pets (excluding In Care status)`);
     
     if (pets.length === 0) {
-      console.log('No pets found in database, sending empty array');
+      console.log('No eligible pets found in database, sending empty array');
       return res.status(200).json([]);
     }
     

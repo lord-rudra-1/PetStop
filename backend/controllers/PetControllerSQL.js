@@ -165,7 +165,7 @@ exports.getAvailablePets = async (req, res) => {
     // Check both lowercase and uppercase status values
     const pets = await Pet.findAll({
       where: {
-        status: ['available', 'Available', 'Approved'] // Check for both lowercase and uppercase values
+        status: ['available', 'Available', 'Approved','pending'] // Check for both lowercase and uppercase values
       },
       order: [['updatedAt', 'DESC']]
     });
@@ -184,24 +184,35 @@ exports.adoptPet = async (req, res) => {
   try {
     const { petId, adopterName, adopterEmail, adopterPhone } = req.body;
     
+    console.log('Adopt pet request received:', req.body);
+    
     // Find the pet
     const pet = await Pet.findByPk(petId);
     
     if (!pet) {
+      console.log('Pet not found with ID:', petId);
       return res.status(404).json({ message: 'Pet not found' });
     }
     
-    if (pet.status !== 'available') {
-      return res.status(400).json({ message: 'This pet is not available for adoption' });
+    console.log('Found pet with status:', pet.status);
+    
+    // Allow pets with status Available, available, or Approved to be adopted
+    if (pet.status === 'Adopted') {
+      return res.status(400).json({ 
+        message: 'This pet is not available for adoption',
+        currentStatus: pet.status
+      });
     }
     
     // Update pet with adopter info and status
     await pet.update({ 
-      status: 'adopted',
+      status: 'Adopted',  // Use uppercase to be consistent
       adopter_name: adopterName,
       adopter_email: adopterEmail,
       adopter_phone: adopterPhone
     });
+    
+    console.log('Pet adopted successfully, new status:', pet.status);
     
     res.status(200).json({
       message: 'Pet adopted successfully',

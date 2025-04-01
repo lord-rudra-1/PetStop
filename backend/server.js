@@ -58,6 +58,10 @@ app.use('/care', petCareRouter);
 app.use('/form', AdoptFormRoute);
 app.use('/admin', AdminRoute);
 
+// Direct route for leave-pet-care form on Services page
+const petCareController = require('./controllers/PetCareController');
+app.post('/leave-pet-care', petCareController.leavePetCareRequest);
+
 // Add default health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Server is running' });

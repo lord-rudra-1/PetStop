@@ -10,11 +10,7 @@ const PetCare = sequelize.define('petcare', {
   },
   petId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Pet,
-      key: 'id'
-    }
+    allowNull: false
   },
   ownerName: {
     type: DataTypes.STRING,
@@ -22,10 +18,7 @@ const PetCare = sequelize.define('petcare', {
   },
   ownerEmail: {
     type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      isEmail: true
-    }
+    allowNull: false
   },
   ownerPhone: {
     type: DataTypes.STRING,
@@ -40,7 +33,7 @@ const PetCare = sequelize.define('petcare', {
     allowNull: true
   },
   status: {
-    type: DataTypes.ENUM('active', 'completed', 'cancelled'),
+    type: DataTypes.STRING,
     defaultValue: 'active'
   },
   notes: {
@@ -48,11 +41,15 @@ const PetCare = sequelize.define('petcare', {
     allowNull: true
   }
 }, {
-  timestamps: true
+  timestamps: false,
+  tableName: 'petcare',
+  indexes: []
 });
 
-// Set up associations
-PetCare.belongsTo(Pet, { foreignKey: 'petId' });
-Pet.hasMany(PetCare, { foreignKey: 'petId' });
+// Define association but make it optional during operations
+PetCare.belongsTo(Pet, { 
+  foreignKey: 'petId',
+  constraints: false
+});
 
 module.exports = PetCare; 

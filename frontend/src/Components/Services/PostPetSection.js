@@ -173,7 +173,7 @@ const PostPetSection = () => {
             <option value="Fish">Fish</option>
             <option value="Other">Other</option>
           </select>
-          
+        
         </div>
 
         <div className="input-box">

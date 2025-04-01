@@ -331,20 +331,60 @@ body {
 .popup {
     position: fixed;
     top: 0;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: var(--light);
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.popup-content h4 {
+    color: var(--primary);
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-family: "Varela Round", sans-serif;
+}
+
+.popup-content p {
+    color: var(--primary);
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: "Varela Round", sans-serif;
 }
 
 .close-btn {
-    background-color: #f41800;
+    background-color: var(--primary);
     border: none;
-    color: white;
-    padding: 8px 15px;
-    margin-top: 10px;
+    color: var(--light);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Varela Round", sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: var(--accent);
 }
 
 .close-btn i {
-    margin-left: 5px;
+    margin-left: 8px;
 }
 
 .read-more-btn:hover {
@@ -1353,605 +1393,56 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
 }
 
 .popup-content {
     background-color: var(--light);
-    padding: 20px;
-    max-width: 80%;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
-    overflow-x: hidden;
-    word-wrap: break-word;
-}
-
-.close-btn {
-    background-color: var(--primary);
-    border: none;
-    color: var(--light);
-    padding: 8px 15px;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-.close-btn i {
-    margin-left: 5px;
-}
-
-.form-pet-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
     padding: 30px;
-    background: linear-gradient(135deg, rgba(220, 160, 109, 0.95), rgba(220, 160, 109, 0.98));
-    border-radius: 30px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 800px;
-}
-
-.pet-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-    background: linear-gradient(135deg, rgba(220, 160, 109, 0.95), rgba(220, 160, 109, 0.98));
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.pet-details:hover {
-    transform: translateY(-5px);
-}
-
-.pet-pic {
-    flex: 0 0 200px;
-    height: 150px;
-    border-radius: 15px;
-    overflow: hidden;
+    max-width: 500px;
+    width: 90%;
+    border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.pet-pic img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.pet-pic:hover img {
-    transform: scale(1.1);
-}
-
-.pet-info {
-    flex: 1;
-    padding: 20px;
-    color: #210F37;
-}
-
-.pet-info h2 {
-    font-family: "Varela Round", sans-serif;
-    color: #210F37;
-    font-size: 28px;
-    margin-bottom: 15px;
-    text-align: left;
+    text-align: center;
     position: relative;
-    padding-bottom: 10px;
-}
-
-.pet-info p {
-    font-family: "Varela Round", sans-serif;
-    color: #210F37;
-    font-size: 16px;
-    margin: 8px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.pet-info p b {
-    color: #A55B4B;
-    font-weight: 600;
-}
-
-.pet-info p span {
-    color: #210F37;
-    font-weight: 500;
-}
-
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 100%;
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.form-child-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.form-child-container label {
-    font-family: "Varela Round", sans-serif;
-    color: #210F37;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.form-child-container input,
-.form-child-container textarea {
-    padding: 15px;
-    border: 2px solid #210F37;
-    border-radius: 12px;
-    font-size: 16px;
-    color: #210F37;
-    background: white;
-    transition: all 0.3s ease;
-}
-
-.form-child-container input:focus,
-.form-child-container textarea:focus {
-    outline: none;
-    border-color: #A55B4B;
-    box-shadow: 0 0 0 3px rgba(165, 91, 75, 0.1);
-}
-
-.form-child-container textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.clickable-pet-name {
-    color: #A55B4B;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.clickable-pet-name:hover {
-    color: #4F1C51;
-}
-
-.req-filter-selection {
-    padding: 12px 25px;
-    border-radius: 25px;
-    color: white;
-    background: linear-gradient(135deg, #210F37, #4F1C51);
-    border: none;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.req-filter-selection:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(135deg, #4F1C51, #A55B4B);
-}
-
-.req-filter-selection:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(165, 91, 75, 0.2);
-}
-
-@media (max-width: 768px) {
-    .pet-details {
-        flex-direction: column;
-        text-align: center;
-        padding: 15px;
-    }
-
-    .pet-pic {
-        width: 100%;
-        height: 200px;
-        margin-bottom: 20px;
-    }
-
-    .pet-info h2 {
-        text-align: center;
-    }
-
-    .pet-info h2::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .form-container {
-        padding: 20px;
-    }
-}
-
-.contactUs-main-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px 50px;
-}
-
-.contactUs-left-para {
-    width: 55vw;
-    padding: 20px 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Roboto", sans-serif;
-    font-family: "Varela Round", sans-serif;
-}
-
-.contactUs-left-para h3 {
-    font-size: 40px;
-    color: black;
-}
-
-.contactUs-left-para i {
-    margin: 30px 0 20px 0;
-    font-size: 48px;
-    color: black;
-}
-
-.contactUs-left-para a {
-    color: black;
-    text-decoration: none;
-    font-size: 24px;
-    margin: 10px 0;
-    transition: color 0.3s ease;
-}
-
-.contactUs-left-para a:hover {
-    color: var(--accent);
-}
-
-.contactUs-pic img {
-    height: 90vh;
-    margin-top: 15px;
-    margin-right: 150px;
-}
-
-.contactUs-pic img:hover {
-    animation: bounce 1s ease infinite;
-}
-
-.footer {
-    background: linear-gradient(to right, var(--primary), var(--secondary));
-    color: var(--light);
-    padding: 40px 0;
-    margin-top: 50px;
-}
-
-.footer-content {
-    text-align: center;
-}
-
-.mail-links {
-    color: var(--light);
-    text-decoration: none;
-}
-
-.mail-links:hover {
-    text-decoration: underline;
-}
-
-.contact-links {
-    color: var(--light);
-    text-decoration: none;
-    padding: 5px;
-}
-
-.contact-links:hover {
-    color: var(--accent);
-}
-
-.below-footer {
-    background-color: var(--primary);
-    color: var(--light);
-    padding: 10px;
-    text-align: center;
-    line-height: 1.6;
-}
-
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--primary);
-    color: white;
-    padding: 10px 20px;
-}
-
-.navbar-brand {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.navbar-time {
-    font-family: "Varela Round", sans-serif;
-    font-size: 16px;
-}
-
-.admin-footer {
-    background-color: var(--primary);
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    width: 100%;
-}
-
-.admin-footer p {
-    margin: 0;
-}
-
-.login-body {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(to bottom right, var(--secondary), var(--accent));
-}
-
-.login-container {
-    width: 300px;
-    margin: auto auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--light);
-    justify-content: center;
-    align-items: center;
-}
-
-.login-container h2 {
-    font-size: 1.5rem;
-    color: var(--primary);
-    margin-bottom: 10px;
-}
-
-.login-container input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid var(--primary);
-    border-radius: 5px;
-}
-
-.login-container input:focus {
-    border: 1px solid var(--accent);
-}
-
-.login-container button {
-    background-color: var(--primary);
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.login-container button:hover {
-    background-color: var(--accent);
-}
-
-.error-message {
-    color: var(--primary);
-    font-size: 1rem;
-    margin-bottom: 10px;
-}
-
-
-.admin-screen-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 50px 0;
-}
-
-.admin-screen-left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 20vw;
-    min-width: 20vw;
-    padding: 25px;
-}
-
-.admin-screen-left h3 {
     margin-bottom: 20px;
 }
 
-.admin-screen-left p {
-    font-weight: bold;
-    font-size: large;
+.popup-content h4 {
     color: var(--primary);
+    font-size: 24px;
+    margin-bottom: 15px;
     font-family: "Varela Round", sans-serif;
-    cursor: pointer;
-    margin: 10px 0;
-    display: flex;
-    justify-content: flex-start;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--primary);
 }
 
-.admin-screen-left p:hover {
-    opacity: 0.8;
-}
-
-.admin-screen-right {
-    border-left: 3px solid var(--primary);
-    padding: 0 4vw;
-    max-width: 80vw;
-    min-width: 80vw;
-}
-
-.pet-view-card {
-    display: flex;
-    flex-direction: column;
-    margin: 10px 10px;
-    border: 1px solid var(--primary);
-    width: 310px;
-    overflow: hidden;
-}
-
-.pet-card-pic {
-    max-width: 250px;
-    min-width: 250px;
-}
-
-.pet-card-pic img {
-    width: 310px;
-    height: 180px;
-    object-fit: cover;
-}
-
-.pet-card-details {
-    padding: 5px 10px;
-}
-
-.pet-card-details h2 {
-    font-family: "Varela Round", sans-serif;
+.popup-content p {
     color: var(--primary);
-    text-align: center;
-    margin: 5px 0;
-}
-
-.pet-card-details p {
+    font-size: 16px;
+    line-height: 1.5;
     font-family: "Varela Round", sans-serif;
-    color: var(--primary);
-}
-
-.form-card-details {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    padding: 5px 10px;
-}
-
-.form-card-details h2 {
-    font-family: "Varela Round", sans-serif;
-    color: var(--primary);
-    text-align: center;
-    margin: 5px 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.form-card-details p {
-    font-family: "Varela Round", sans-serif;
-    color: var(--primary);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.show-interest-btn {
-    display: flex;
-    justify-content: flex-end;
-    padding: 15px;
-    background-color: white;
-}
-
-.show-interest-btn button {
-    font-family: "Varela Round", sans-serif;
-    font-size: 14px;
-    padding: 8px 15px;
-    border-radius: 20px;
-    border: none;
-    color: white;
-    background-color: var(--primary);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: auto;
-    min-width: 120px;
-    max-width: 150px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.show-interest-btn button:hover {
-    background-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(165, 91, 75, 0.2);
-}
-
-.app-rej-btn {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.app-rej-btn button {
-    font-family: "Varela Round", sans-serif;
-    font-size: 14px;
-    margin: 10px 0;
-    border-radius: 100px;
-    border: none;
-    padding: 8px 15px;
-    color: var(--light);
-    background-color: var(--primary);
-    min-width: 90px;
-}
-
-.show-interest-btn button:hover {
-    cursor: pointer;
-    background-color: var(--accent);
-}
-
-.app-rej-btn button:hover {
-    cursor: pointer;
-    background-color: var(--accent);
-}
-
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.popup-content {
-    background-color: var(--light);
-    padding: 20px;
-    max-width: 80%;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
-    overflow-x: hidden;
-    word-wrap: break-word;
 }
 
 .close-btn {
     background-color: var(--primary);
     border: none;
     color: var(--light);
-    padding: 8px 15px;
-    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
+    font-family: "Varela Round", sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: var(--accent);
 }
 
 .close-btn i {
-    margin-left: 5px;
+    margin-left: 8px;
 }
 
 .read-more-btn {
@@ -2304,47 +1795,56 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     z-index: 1000;
 }
 
 .popup-content {
-    background-color: white;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    max-width: 450px;
+    background-color: var(--light);
+    padding: 30px;
+    max-width: 500px;
     width: 90%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
 }
 
 .popup-content h4 {
     color: var(--primary);
-    font-size: 28px;
-    margin-bottom: 20px;
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-family: "Varela Round", sans-serif;
 }
 
 .popup-content p {
     color: var(--primary);
-    font-size: 18px;
-    margin-bottom: 25px;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: "Varela Round", sans-serif;
 }
 
 .close-btn {
-    background-color: var(--accent);
-    color: white;
-    padding: 12px 25px;
+    background-color: var(--primary);
     border: none;
-    border-radius: 12px;
-    font-size: 18px;
+    color: var(--light);
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-family: "Varela Round", sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .close-btn:hover {
-    background-color: var(--primary);
-    transform: translateY(-2px);
+    background-color: var(--accent);
+}
+
+.close-btn i {
+    margin-left: 8px;
 }
 
 @media (max-width: 768px) {
@@ -2454,6 +1954,92 @@ body {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(165, 91, 75, 0.1);
     background-color: white;
+}
+
+.contactUs-main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 30px;
+    background-color: var(--light);
+    min-height: 80vh;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contactUs-left-para {
+    flex: 1;
+    padding-right: 50px;
+}
+
+.contactUs-left-para h3 {
+    color: var(--primary);
+    font-size: 36px;
+    margin-bottom: 30px;
+    font-family: "Varela Round", sans-serif;
+}
+
+.contactUs-left-para i {
+    color: var(--accent);
+    font-size: 24px;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.contactUs-left-para .mail-links {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 20px;
+    font-family: "Varela Round", sans-serif;
+    display: block;
+    margin-bottom: 30px;
+    transition: color 0.3s ease;
+}
+
+.contactUs-left-para .mail-links:hover {
+    color: var(--accent);
+}
+
+.contactUs-pic {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contactUs-pic img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.contactUs-pic img:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .contactUs-main-container {
+        flex-direction: column;
+        padding: 30px 20px;
+        text-align: center;
+    }
+
+    .contactUs-left-para {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+
+    .contactUs-left-para i {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .contactUs-pic img {
+        max-width: 100%;
+    }
 }
 
 

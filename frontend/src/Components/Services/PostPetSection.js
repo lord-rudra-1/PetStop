@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import postPet from "./images/postPet.png";
 import './ServiceSections.css';
 
@@ -119,6 +120,24 @@ const PostPetSection = () => {
     }
   };
 
+  // Create a portal for the success popup
+  const renderSuccessPopup = () => {
+    if (!showPopup) return null;
+    
+    return ReactDOM.createPortal(
+      <div className="popup" onClick={togglePopup}>
+        <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+          <h4>Application Submitted!</h4>
+          <p>We'll review your pet for adoption soon.</p>
+          <button onClick={togglePopup} className="close-btn">
+            Close <i className="fa fa-times"></i>
+          </button>
+        </div>
+      </div>,
+      document.body
+    );
+  };
+
   return (
     <section className="service-section">
       <h2>Leave a Pet for Adoption</h2>
@@ -220,19 +239,10 @@ const PostPetSection = () => {
         <button type="submit" className="cta-button" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit Your Pet"}
         </button>
-
-        {showPopup && (
-          <div className="popup">
-            <div className="popup-content">
-              <h4>Application Submitted!</h4>
-              <p>We'll review your pet for adoption soon.</p>
-            </div>
-            <button onClick={togglePopup} className="close-btn">
-              Close <i className="fa fa-times"></i>
-            </button>
-          </div>
-        )}
       </form>
+      
+      {/* Render the popup using portal */}
+      {renderSuccessPopup()}
     </section>
   );
 };

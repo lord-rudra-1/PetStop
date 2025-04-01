@@ -27,17 +27,14 @@ exports.postPetRequest = async (req, res) => {
     }
 
     try {
-      // For testing purposes, set status to Approved instead of Pending
-      // This will make pets show up on the /pets page immediately
       const status = process.env.NODE_ENV === 'development' ? 'Approved' : 'Pending';
       console.log(`Setting pet status to: ${status} (based on environment)`);
       
-      // Store form data directly, using both description/breed fields AND raw form fields
+      // Store form data directly
       const pet = await Pet.create({
         name,
         age,
         type: type || 'Other', // Default to 'Other' if type is not provided
-        // Store in both the standard fields and raw form fields
         breed: area,          // For compatibility with other parts of the app
         area,                 // Store original form field
         description: justification, // For compatibility with other parts of the app
@@ -45,7 +42,7 @@ exports.postPetRequest = async (req, res) => {
         email,
         phone,
         image,
-        status               // Use the status determined above
+        status
       });
 
       console.log('Pet created successfully:', pet.id);
@@ -58,43 +55,20 @@ exports.postPetRequest = async (req, res) => {
       console.error('Database error creating pet record:', dbError);
       // Handle Sequelize validation errors
       if (dbError.name === 'SequelizeValidationError') {
-        return res.status(400).json({ 
-          message: 'Validation error', 
+        return res.status(400).json({
+          message: 'Validation error',
           errors: dbError.errors.map(e => e.message) 
         });
       }
-      throw dbError; // Re-throw if it's not a validation error
+      throw dbError;
     }
   } catch (error) {
     console.error('Error creating pet record:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+  console.error('Error updating pet status:', error);
 
-// Admin approves or rejects a pet post
-// exports.updatePetStatus = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const { status } = req.body;
-    
-//     const pet = await Pet.findByPk(id);
-    
-//     if (!pet) {
-//       return res.status(404).json({ message: 'Pet not found' });
-//     }
-    
-//     // Update pet status
-//     await pet.update({ status });
-    
-//     res.status(200).json({
-//       message: `Pet status updated to ${status}`,
-//       pet
-//     });
-//   } catch (error) {
-//     console.error('Error updating pet status:', error);
-//     res.status(500).json({ message: 'Server error', error: error.message });
-//   }
-// };
 
 // Delete a pet post
 exports.deletePet = async (req, res) => {
@@ -246,4 +220,4 @@ exports.makePetAvailable = async (req, res) => {
     console.error('Error making pet available:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
-}; 
+};

@@ -274,8 +274,6 @@ exports.returnPetCareRequest = async (req, res) => {
         endDate: returnDate ? new Date(returnDate) : new Date()
       }, { transaction });
 
-      // Do not change the pet's status - keep it as "In Care"
-      // This pet is not up for adoption even after care is completed
       console.log('Pet care status updated to completed, pet status remains In Care');
 
       await transaction.commit();

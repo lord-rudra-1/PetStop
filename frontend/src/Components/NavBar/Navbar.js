@@ -7,7 +7,7 @@ const Navbar = (props) => {
     <div className="navbar-container">
       <div>
         <Link className="logo-container" to="/">
-          <img className="navbar-logo" src={logo} alt="PetStop Logo" />
+          <img className="navbar-logo" src={logo} alt="PetStop" />
           <p>{props.title}</p>
         </Link>
       </div>
@@ -28,7 +28,7 @@ const Navbar = (props) => {
         </ul>
       </div>
       <div>
-        <Link to="/services">
+        <Link to="/services#">
           <button className="Navbar-button">Give a Pet</button>
         </Link>
       </div>

@@ -12,8 +12,8 @@ const Contact = () => {
         </a>
 
         <i class="fa fa-phone"></i>
-        <a class="mail-links" href="tel:+923019583959">
-          +92 301 9583959
+        <a class="mail-links" href="tel:+919192173314">
+          +91 9192173314
         </a>
       </div>
       <div className="contactUs-pic">

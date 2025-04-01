@@ -11,7 +11,7 @@
 .custom-form-heading {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #056571;
+  color: #210F37;
   text-align: center;
 }
 
@@ -40,7 +40,7 @@
 .pet-info h2 {
   font-size: 24px;
   margin-bottom: 10px;
-  color: #056571;
+  color: #210F37;
 }
 
 .pet-info p {
@@ -70,7 +70,7 @@
   text-align: left;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #056571;
+  color: #210F37;
 }
 
 .custom-input {
@@ -82,7 +82,7 @@
 }
 
 .custom-cta-button {
-  background-color: #056571;
+  background-color: #210F37;
   color: white;
   border: none;
   padding: 12px 20px;
@@ -94,7 +94,7 @@
 }
 
 .custom-cta-button:hover {
-  background-color: #044955;
+  background-color: #4F1C51;
 }
 
 .error-message {
@@ -140,7 +140,7 @@
 }
 
 .close-btn {
-  background-color: #056571;
+  background-color: #210F37;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -151,7 +151,7 @@
 }
 
 .close-btn:hover {
-  background-color: #044955;
+  background-color: #4F1C51;
 }
 
 /* Responsive adjustments */

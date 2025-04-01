@@ -11,21 +11,28 @@ const PetsViewer = (props) => {
   };
 
   const formatTimeAgo = (updatedAt) => {
-    const date = new Date(updatedAt);
-    return formatDistanceToNow(date, { addSuffix: true });
+    // Handle missing updatedAt value
+    if (!updatedAt) {
+      return "Recently added";
+    }
+    try {
+      const date = new Date(updatedAt);
+      return formatDistanceToNow(date, { addSuffix: true });
+    } catch (error) {
+      console.log("Date formatting error:", error);
+      return "Recently added";
+    }
   };
 
   return (
     <div className='pet-view-card'>
-      <div className='pet-card-pic'>
-        <img src={`http://localhost:4000/images/${props.pet.filename}`} alt={props.pet.name} />
-      </div>
       <div className='pet-card-details'>
         <h2>{props.pet.name}</h2>
         <p><b>Type:</b> {props.pet.type}</p>
         <p><b>Age:</b> {props.pet.age}</p>
-        <p><b>Location:</b> {props.pet.area}</p>
-        <p>{formatTimeAgo(props.pet.updatedAt)}</p>
+        <p><b>Location:</b> {props.pet.area || props.pet.breed}</p>
+        {/* Only show time if updatedAt exists */}
+        {props.pet.updatedAt && <p>{formatTimeAgo(props.pet.updatedAt)}</p>}
       </div>
       <div className='show-interest-btn'>
         <button onClick={togglePopup}>Show Interest <i className="fa fa-paw"></i></button>
@@ -53,7 +60,7 @@ const Pets = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await fetch('http://localhost:4000/approvedPets')
+        const response = await fetch('http://localhost:5002/approvedPets')
         if (!response.ok) {
           throw new Error('An error occurred')
         }

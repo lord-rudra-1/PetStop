@@ -13,7 +13,9 @@ const PetCare = require('./models/PetCare');
 // Initialize models and their relationships
 (async () => {
   try {
-    await sequelize.sync({ force: false, alter: true }); // Set force: true to recreate tables
+    // Use alter: true to apply schema changes without dropping tables
+    console.log("Syncing database with alter: true to apply schema changes...");
+    await sequelize.sync({ force: false, alter: true });
     console.log("Database synced successfully!");
     
     // Create default admin if needed
@@ -71,8 +73,23 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT_SERVER || 5002;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+
+// Function to start the server
+const startServer = (port) => {
+  return app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  })
+  .on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${port} is busy, trying port ${port + 1}`);
+      startServer(port + 1);
+    } else {
+      console.error('Server error:', err);
+    }
+  });
+};
+
+// Start the server
+startServer(PORT);
 
 module.exports = app;

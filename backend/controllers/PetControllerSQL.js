@@ -5,14 +5,19 @@ const path = require('path');
 // Post a pet for adoption
 exports.postPetRequest = async (req, res) => {
   try {
+    console.log('Post pet request received:');
     console.log('Request body:', req.body);
     console.log('Request file:', req.file);
     
     const { name, age, area, justification, email, phone, type } = req.body;
     
     // Validate required fields
-    if (!name || !age || !type || !email || !phone) {
-      return res.status(400).json({ message: 'Missing required fields' });
+    if (!name || !age || !email || !phone) {
+      return res.status(400).json({ 
+        message: 'Missing required fields',
+        required: ['name', 'age', 'email', 'phone'],
+        received: Object.keys(req.body)
+      });
     }
     
     // Handle case where file upload might be missing
@@ -21,22 +26,45 @@ exports.postPetRequest = async (req, res) => {
       image = req.file.filename;
     }
 
-    const pet = await Pet.create({
-      name,
-      age,
-      breed: area || 'Unknown', // Using area as breed, provide default if missing
-      description: justification || 'No description provided',
-      email,
-      phone,
-      type,
-      image,
-      status: 'pending'
-    });
+    try {
+      // For testing purposes, set status to Approved instead of Pending
+      // This will make pets show up on the /pets page immediately
+      const status = process.env.NODE_ENV === 'development' ? 'Approved' : 'Pending';
+      console.log(`Setting pet status to: ${status} (based on environment)`);
+      
+      // Store form data directly, using both description/breed fields AND raw form fields
+      const pet = await Pet.create({
+        name,
+        age,
+        type: type || 'Other', // Default to 'Other' if type is not provided
+        // Store in both the standard fields and raw form fields
+        breed: area,          // For compatibility with other parts of the app
+        area,                 // Store original form field
+        description: justification, // For compatibility with other parts of the app
+        justification,        // Store original form field
+        email,
+        phone,
+        image,
+        status               // Use the status determined above
+      });
 
-    res.status(201).json({
-      message: 'Pet post created successfully, awaiting approval',
-      pet
-    });
+      console.log('Pet created successfully:', pet.id);
+      
+      res.status(201).json({
+        message: `Pet post created successfully, status: ${status}`,
+        pet
+      });
+    } catch (dbError) {
+      console.error('Database error creating pet record:', dbError);
+      // Handle Sequelize validation errors
+      if (dbError.name === 'SequelizeValidationError') {
+        return res.status(400).json({ 
+          message: 'Validation error', 
+          errors: dbError.errors.map(e => e.message) 
+        });
+      }
+      throw dbError; // Re-throw if it's not a validation error
+    }
   } catch (error) {
     console.error('Error creating pet record:', error);
     res.status(500).json({ message: 'Server error', error: error.message });

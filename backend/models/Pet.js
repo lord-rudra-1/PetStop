@@ -47,6 +47,16 @@ const Pet = sequelize.define('pet', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  // Fields specifically for area/location data from form
+  area: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  // Fields specifically for justification data from form
+  justification: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
   // Additional fields for adoption information
   adopter_name: {
     type: DataTypes.STRING,
@@ -64,7 +74,10 @@ const Pet = sequelize.define('pet', {
     allowNull: true
   }
 }, {
-  timestamps: true
+  // Disable timestamps since they don't exist in the database
+  timestamps: false,
+  // Set the table name to match existing database
+  tableName: 'pets'
 });
 
 module.exports = Pet; 

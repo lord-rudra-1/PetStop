@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import leavePetCare from "./images/leavePetCare.png";
 import './ServiceSections.css';
 
@@ -45,6 +46,17 @@ const LeavePetCareSection = () => {
     setIsTypeSelected(true);
 
     try {
+      console.log("Submitting pet care request with data:", {
+        name,
+        email,
+        phone,
+        petName,
+        petType: petType === "None" ? "Other" : petType,
+        startDate,
+        endDate,
+        specialInstructions,
+      });
+      
       const response = await fetch("http://localhost:5002/leave-pet-care", {
         method: "POST",
         headers: {
@@ -55,17 +67,35 @@ const LeavePetCareSection = () => {
           email,
           phone,
           petName,
-          petType,
+          petType: petType === "None" ? "Other" : petType,
           startDate,
           endDate,
           specialInstructions,
         }),
       });
 
+      let responseData;
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        responseData = await response.json();
+      } else {
+        const text = await response.text();
+        console.error("Non-JSON response:", text);
+        responseData = { message: "Server returned non-JSON response" };
+      }
+      
       if (!response.ok) {
-        throw new Error("Failed to submit form");
+        console.error("Error submitting form:", responseData);
+        let errorMessage = responseData.message || "Failed to submit form";
+        if (responseData.error) {
+          errorMessage += ": " + responseData.error;
+        }
+        throw new Error(errorMessage);
       }
 
+      console.log("Pet care request submitted successfully:", responseData);
+      
+      // Reset form
       setName("");
       setEmail("");
       setPhone("");
@@ -74,12 +104,34 @@ const LeavePetCareSection = () => {
       setStartDate("");
       setEndDate("");
       setSpecialInstructions("");
+      
+      // Show success popup
       togglePopup();
     } catch (error) {
       console.error("Error submitting form:", error);
+      alert(`Error submitting form: ${error.message}`);
     } finally {
       setIsSubmitting(false);
+      setIsTypeSelected(false);
     }
+  };
+
+  // Create a portal for the success popup
+  const renderSuccessPopup = () => {
+    if (!showPopup) return null;
+    
+    return ReactDOM.createPortal(
+      <div className="popup" onClick={togglePopup}>
+        <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+          <h4>Request Submitted!</h4>
+          <p>We'll contact you shortly to confirm your pet's stay.</p>
+          <button onClick={togglePopup} className="close-btn">
+            Close <i className="fa fa-times"></i>
+          </button>
+        </div>
+      </div>,
+      document.body
+    );
   };
 
   return (
@@ -192,19 +244,10 @@ const LeavePetCareSection = () => {
         <button type="submit" className="cta-button" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit Request"}
         </button>
-
-        {showPopup && (
-          <div className="popup">
-            <div className="popup-content">
-              <h4>Request Submitted!</h4>
-              <p>We'll contact you shortly to confirm your pet's stay.</p>
-            </div>
-            <button onClick={togglePopup} className="close-btn">
-              Close <i className="fa fa-times"></i>
-            </button>
-          </div>
-        )}
       </form>
+      
+      {/* Render the popup using portal */}
+      {renderSuccessPopup()}
     </section>
   );
 };

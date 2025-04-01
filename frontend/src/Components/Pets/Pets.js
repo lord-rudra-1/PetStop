@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { formatDistanceToNow } from 'date-fns';
 import AdoptForm from '../AdoptForm/AdoptForm';
+import '../AdoptForm/AdoptForm.css'; // Import the AdoptForm CSS
 
 // PetsViewer component
 const PetsViewer = (props) => {
@@ -24,6 +26,21 @@ const PetsViewer = (props) => {
     }
   };
 
+  // Render the adoption form in a portal
+  const renderAdoptFormPortal = () => {
+    if (!showPopup) return null;
+    
+    return ReactDOM.createPortal(
+      <div className="popup" onClick={togglePopup}>
+        <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+          <AdoptForm closeForm={togglePopup} pet={props.pet} />
+          <button onClick={togglePopup} className="close-btn">Close</button>
+        </div>
+      </div>,
+      document.body
+    );
+  };
+
   return (
     <div className='pet-view-card'>
       <div className='pet-card-details'>
@@ -37,16 +54,9 @@ const PetsViewer = (props) => {
       <div className='show-interest-btn'>
         <button onClick={togglePopup}>Show Interest <i className="fa fa-paw"></i></button>
       </div>
-      {showPopup && (
-        <div className='popup'>
-          <div className='popup-content'>
-            <AdoptForm closeForm={togglePopup} pet={props.pet}/>
-          </div>
-          <button onClick={togglePopup} className='close-btn'>
-            Close <i className="fa fa-times"></i>
-          </button>
-        </div>
-      )}
+      
+      {/* Render the popup via portal */}
+      {renderAdoptFormPortal()}
     </div>
   );
 };

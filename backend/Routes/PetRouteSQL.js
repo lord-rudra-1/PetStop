@@ -123,7 +123,7 @@ router.get('/approvedPets', async (req, res) => {
     const pets = await Pet.findAll({
       where: {
         status: {
-          [Op.notIn]: ['In Care', 'in care'] // Exclude both variations of the status
+          [Op.notIn]: ['In Care', 'in care', 'completed', ] // Exclude both variations of the status
         }
       }
     });

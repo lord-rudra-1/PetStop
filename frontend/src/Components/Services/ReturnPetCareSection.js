@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import returnPetCare from "./images/returnPetCare.png";
 import './ServiceSections.css';
 
@@ -12,9 +13,15 @@ const ReturnPetCareSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
+  };
+
+  const toggleErrorPopup = () => {
+    setShowErrorPopup(!showErrorPopup);
   };
 
   const isEmailValid = (email) => {
@@ -40,6 +47,14 @@ const ReturnPetCareSection = () => {
     setEmailError(false);
 
     try {
+      console.log("Submitting return pet care request with data:", {
+        name,
+        email,
+        phone,
+        petName,
+        returnDate,
+      });
+      
       const response = await fetch("http://localhost:5002/return-pet-care", {
         method: "POST",
         headers: {
@@ -54,10 +69,23 @@ const ReturnPetCareSection = () => {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to submit form");
+      let responseData;
+      try {
+        responseData = await response.json();
+      } catch (err) {
+        responseData = { message: "Could not parse server response" };
       }
 
+      if (!response.ok) {
+        console.error("Error response:", responseData);
+        setErrorMessage(responseData.message || responseData.details || "Failed to submit return request");
+        toggleErrorPopup();
+        return;
+      }
+
+      console.log("Return request submitted successfully:", responseData);
+      
+      // Reset form on success
       setName("");
       setEmail("");
       setPhone("");
@@ -66,9 +94,47 @@ const ReturnPetCareSection = () => {
       togglePopup();
     } catch (error) {
       console.error("Error submitting form:", error);
+      setErrorMessage("Network error. Please try again later.");
+      toggleErrorPopup();
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // Create portal for success popup
+  const renderSuccessPopup = () => {
+    if (!showPopup) return null;
+    
+    return ReactDOM.createPortal(
+      <div className="popup" onClick={togglePopup}>
+        <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+          <h4>Return Request Submitted!</h4>
+          <p>We'll contact you shortly to confirm your pet's return.</p>
+          <button onClick={togglePopup} className="close-btn">
+            Close <i className="fa fa-times"></i>
+          </button>
+        </div>
+      </div>,
+      document.body
+    );
+  };
+
+  // Create portal for error popup
+  const renderErrorPopup = () => {
+    if (!showErrorPopup) return null;
+    
+    return ReactDOM.createPortal(
+      <div className="popup" onClick={toggleErrorPopup}>
+        <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+          <h4>Error</h4>
+          <p>{errorMessage}</p>
+          <button onClick={toggleErrorPopup} className="close-btn">
+            Close <i className="fa fa-times"></i>
+          </button>
+        </div>
+      </div>,
+      document.body
+    );
   };
 
   return (
@@ -77,7 +143,7 @@ const ReturnPetCareSection = () => {
       <img src={returnPetCare} alt="Pet Return Service" />
 
       <p>
-      Excited to reunite with your furry friend? Let us know your preferred pickup time, and we’ll ensure everything is perfectly prepared for a seamless homecoming!
+      Excited to reunite with your furry friend? Let us know your preferred pickup time, and we'll ensure everything is perfectly prepared for a seamless homecoming!
       </p>
 
       <form onSubmit={handleSubmit} className="service-form">
@@ -141,19 +207,11 @@ const ReturnPetCareSection = () => {
         <button type="submit" className="cta-button" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit Return Request"}
         </button>
-
-        {showPopup && (
-          <div className="popup">
-            <div className="popup-content">
-              <h4>Return Request Submitted!</h4>
-              <p>We'll contact you shortly to confirm your pet's return.</p>
-            </div>
-            <button onClick={togglePopup} className="close-btn">
-              Close <i className="fa fa-times"></i>
-            </button>
-          </div>
-        )}
       </form>
+      
+      {/* Render popups using portals */}
+      {renderSuccessPopup()}
+      {renderErrorPopup()}
     </section>
   );
 };

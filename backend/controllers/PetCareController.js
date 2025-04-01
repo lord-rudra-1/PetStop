@@ -209,4 +209,94 @@ exports.getPetCareHistory = async (req, res) => {
     console.error('Error getting pet care history:', error);
     return res.status(500).json({ message: 'Server error', error: error.message });
   }
+};
+
+// Process a return pet care request from the form
+exports.returnPetCareRequest = async (req, res) => {
+  try {
+    console.log('Received return pet care request:', req.body);
+    const { name, email, phone, petName, returnDate } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !phone || !petName) {
+      return res.status(400).json({ 
+        message: 'Missing required fields',
+        required: ['name', 'email', 'phone', 'petName'],
+        received: req.body 
+      });
+    }
+
+    // Start a transaction
+    const transaction = await sequelize.transaction();
+
+    try {
+      // Find the pet by name and owner email
+      const pet = await Pet.findOne({
+        where: {
+          name: petName,
+          email: email,
+          status: 'In Care'
+        }
+      }, { transaction });
+
+      if (!pet) {
+        await transaction.rollback();
+        return res.status(404).json({ 
+          message: 'Pet not found or not in care',
+          details: 'We could not find a pet with this name under your email that is currently in our care'
+        });
+      }
+
+      console.log('Found pet to return from care:', pet.id, pet.name);
+
+      // Find active pet care entry
+      const petCare = await PetCare.findOne({
+        where: {
+          petId: pet.id,
+          ownerEmail: email,
+          status: 'active'
+        }
+      }, { transaction });
+
+      if (!petCare) {
+        await transaction.rollback();
+        return res.status(404).json({ 
+          message: 'No active care record found',
+          details: 'We could not find an active care record for this pet'
+        });
+      }
+
+      console.log('Found pet care entry to update:', petCare.id);
+
+      // Update pet care entry to completed
+      await petCare.update({
+        status: 'completed',
+        endDate: returnDate ? new Date(returnDate) : new Date()
+      }, { transaction });
+
+      // Do not change the pet's status - keep it as "In Care"
+      // This pet is not up for adoption even after care is completed
+      console.log('Pet care status updated to completed, pet status remains In Care');
+
+      await transaction.commit();
+
+      return res.status(200).json({
+        message: 'Pet care record has been completed',
+        details: 'The pet will remain in our care and not available for adoption',
+        petId: pet.id,
+        petCareId: petCare.id
+      });
+    } catch (txError) {
+      await transaction.rollback();
+      console.error('Transaction error in return pet care:', txError);
+      throw txError;
+    }
+  } catch (error) {
+    console.error('Error processing return pet care request:', error);
+    return res.status(500).json({ 
+      message: 'Server error', 
+      error: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
+  }
 }; 

@@ -151,19 +151,7 @@ router.get('/approvedPets', async (req, res) => {
   }
 });
 
-// ADMIN ROUTES
 
-// Get all pets
-router.get('/admin/pets', petController.getAllPets);
-
-// Get pets by status
-router.get('/admin/pets/:status', petController.getPetsByStatus);
-
-// Update pet status (approve/reject)
-router.put('/admin/pets/:id', petController.updatePetStatus);
-
-// Delete pet
-router.delete('/admin/pets/:id', petController.deletePet);
 
 // TESTING ROUTES - Remove in production
 router.put('/make-available/:id', petController.makePetAvailable);

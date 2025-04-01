@@ -7,7 +7,6 @@ import Services from "./Components/Services/Services";
 import Contact from "./Components/Contact/Contact";
 import Pets from "./Components/Pets/Pets";
 import AdoptForm from "./Components/AdoptForm/AdoptForm";
-import AdminLogin from "./Components/AdminPanel/AdminLogin";
 import "./App.css";
 
 const Layout = ({ children }) => (
@@ -61,10 +60,6 @@ const App = () => {
               <AdoptForm />
             </Layout>
           } 
-        />
-        <Route 
-          path="/admin" 
-          element={<AdminLogin />} 
         />
       </Routes>
     </Router>

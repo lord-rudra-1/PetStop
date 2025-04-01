@@ -7,7 +7,6 @@ const sequelize = require('./util/index');
 // Import models
 const Pet = require('./models/Pet');
 const AdoptForm = require('./models/AdoptForm');
-const Admin = require('./models/Admin');
 const PetCare = require('./models/PetCare');
 
 // Initialize models and their relationships
@@ -18,15 +17,6 @@ const PetCare = require('./models/PetCare');
     await sequelize.sync({ force: false, alter: true });
     console.log("Database synced successfully!");
     
-    // Create default admin if needed
-    const adminExists = await Admin.findOne({ where: { username: 'admin' } });
-    if (!adminExists) {
-      await Admin.create({
-        username: 'admin',
-        password: 'admin123'
-      });
-      console.log('Default admin account created');
-    }
   } catch (error) {
     console.error("Error syncing database:", error);
   }
@@ -49,14 +39,10 @@ app.use(express.urlencoded({ extended: true }));
 // Import routes - update to use SQL versions
 const petRouter = require('./Routes/PetRouteSQL');
 const petCareRouter = require('./Routes/PetCareRoutes');
-const AdoptFormRoute = require('./Routes/AdoptFormRouteSQL');
-const AdminRoute = require('./Routes/AdminRouteSQL');
 
 // Use routes
 app.use(petRouter);
 app.use('/care', petCareRouter);
-app.use('/form', AdoptFormRoute);
-app.use('/admin', AdminRoute);
 
 // Direct route for leave-pet-care form on Services page
 const petCareController = require('./controllers/PetCareController');

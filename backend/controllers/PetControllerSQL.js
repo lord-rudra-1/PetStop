@@ -72,29 +72,29 @@ exports.postPetRequest = async (req, res) => {
 };
 
 // Admin approves or rejects a pet post
-exports.updatePetStatus = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { status } = req.body;
+// exports.updatePetStatus = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { status } = req.body;
     
-    const pet = await Pet.findByPk(id);
+//     const pet = await Pet.findByPk(id);
     
-    if (!pet) {
-      return res.status(404).json({ message: 'Pet not found' });
-    }
+//     if (!pet) {
+//       return res.status(404).json({ message: 'Pet not found' });
+//     }
     
-    // Update pet status
-    await pet.update({ status });
+//     // Update pet status
+//     await pet.update({ status });
     
-    res.status(200).json({
-      message: `Pet status updated to ${status}`,
-      pet
-    });
-  } catch (error) {
-    console.error('Error updating pet status:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
+//     res.status(200).json({
+//       message: `Pet status updated to ${status}`,
+//       pet
+//     });
+//   } catch (error) {
+//     console.error('Error updating pet status:', error);
+//     res.status(500).json({ message: 'Server error', error: error.message });
+//   }
+// };
 
 // Delete a pet post
 exports.deletePet = async (req, res) => {

@@ -159,7 +159,14 @@ const PostPetSection = () => {
           <input
             type="text"
             value={age}
-            onChange={(e) => {setAge(e.target.value);}}
+            onChange={(e) => {
+              // Only allow positive values or empty string
+              const inputValue = e.target.value;
+              // Allow empty input or positive numbers (can be numeric strings like "2 years")
+              if (inputValue === '' || !inputValue.startsWith('-')) {
+                setAge(inputValue);
+              }
+            }}
             placeholder="Enter your pet's age"
           />
         </div>

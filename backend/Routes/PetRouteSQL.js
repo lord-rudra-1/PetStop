@@ -117,18 +117,18 @@ router.post('/test-form-upload', handleUpload, (req, res) => {
 // Add a route for approvedPets to maintain compatibility with frontend
 router.get('/approvedPets', async (req, res) => {
   try {
-    console.log('Fetching pets for display on pets page (excluding In Care pets)');
+    console.log('Fetching pets for display on pets page (excluding In Care and Adopted pets)');
     
-    // Fetch pets that are not in care
+    // Fetch pets that are not in care or adopted
     const pets = await Pet.findAll({
       where: {
         status: {
-          [Op.notIn]: ['In Care', 'in care', 'completed', ] // Exclude both variations of the status
+          [Op.notIn]: ['In Care', 'in care', 'completed', 'Adopted', 'adopted'] // Also exclude adopted pets
         }
       }
     });
     
-    console.log(`Found ${pets.length} pets (excluding In Care status)`);
+    console.log(`Found ${pets.length} pets (excluding In Care and Adopted status)`);
     
     if (pets.length === 0) {
       console.log('No eligible pets found in database, sending empty array');

@@ -54,3 +54,4 @@ temp/
 # Debugging files
 coverage/
 .cache/
+.early.coverage

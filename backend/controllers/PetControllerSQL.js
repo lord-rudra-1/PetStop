@@ -120,6 +120,9 @@ exports.getPetsByStatus = async (req, res) => {
 exports.getAllPets = async (req, res) => {
   try {
     const pets = await Pet.findAll({
+      where: {
+        status: ['available', 'Available', 'Approved','pending'] // Check for both lowercase and uppercase values
+      },
       order: [['updatedAt', 'DESC']]
     });
     

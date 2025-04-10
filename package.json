@@ -23,7 +23,8 @@
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
     "start": "concurrently \"npm run backend\" \"npm run frontend\"",
     "seed-data": "node backend/seed-data.js",
-    "seed-db": "node backend/seed-db.js"
+    "seed-db": "node backend/seed-db.js",
+    "build": "cd frontend && npm install && npm run build"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^6.6.3",

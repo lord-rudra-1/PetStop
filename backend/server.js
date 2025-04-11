@@ -26,7 +26,9 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173'],
+  origin: process.env.NODE_ENV === 'production' 
+    ? [process.env.FRONTEND_URL || 'https://pet-stop.vercel.app'] 
+    : ['http://localhost:3000', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -40,21 +42,34 @@ app.use(express.urlencoded({ extended: true }));
 const petRouter = require('./Routes/PetRouteSQL');
 const petCareRouter = require('./Routes/PetCareRoutes');
 
-// Use routes
-app.use(petRouter);
-app.use('/care', petCareRouter);
+// Use API prefix for routes in production
+const apiPrefix = process.env.NODE_ENV === 'production' ? '/api' : '';
+app.use(apiPrefix, petRouter);
+app.use(`${apiPrefix}/care`, petCareRouter);
 
 // Direct route for leave-pet-care form on Services page
 const petCareController = require('./controllers/PetCareController');
-app.post('/leave-pet-care', petCareController.leavePetCareRequest);
+app.post(`${apiPrefix}/leave-pet-care`, petCareController.leavePetCareRequest);
 
 // Direct route for return-pet-care form on Services page
-app.post('/return-pet-care', petCareController.returnPetCareRequest);
+app.post(`${apiPrefix}/return-pet-care`, petCareController.returnPetCareRequest);
 
 // Add default health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Server is running' });
 });
+
+// Serve static frontend files in production
+if (process.env.NODE_ENV === 'production') {
+  // Serve frontend static files
+  const frontendBuildPath = path.join(__dirname, '../frontend/build');
+  app.use(express.static(frontendBuildPath));
+  
+  // Serve index.html for any non-API routes
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendBuildPath, 'index.html'));
+  });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -65,7 +80,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT_SERVER || 5002;
+const PORT = process.env.PORT || 5002;
 
 // Function to start the server
 const startServer = (port) => {

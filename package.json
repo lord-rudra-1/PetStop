@@ -24,7 +24,8 @@
     "start": "concurrently \"npm run backend\" \"npm run frontend\"",
     "seed-data": "node backend/seed-data.js",
     "seed-db": "node backend/seed-db.js",
-    "build": "cd frontend && npm install && npm run build"
+    "build": "cd frontend && npm install && npm run build",
+    "vercel-build": "chmod +x build-vercel.sh && ./build-vercel.sh"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^6.6.3",

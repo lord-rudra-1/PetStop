@@ -57,7 +57,7 @@ const LeavePetCareSection = () => {
         specialInstructions,
       });
       
-      const response = await fetch("http://localhost:5002/leave-pet-care", {
+      const response = await fetch("/api/leave-pet-care", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

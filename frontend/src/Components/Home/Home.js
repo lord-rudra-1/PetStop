@@ -4,6 +4,7 @@ import HomeDarkCardRightPic from "./images/HomeDarkCardRightPic.png";
 import girlHoldingADog from "./images/girlHoldingADog.png";
 
 // Card component
+// eslint-disable-next-line no-unused-vars
 const Card = ({ imgSrc, title, content }) => {
   return (
     <div className="home-card">

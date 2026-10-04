@@ -48,7 +48,7 @@ function AdoptForm(props) {
       setIsSubmitting(true);
       console.log('Submitting adoption request for pet:', props.pet.id);
 
-      const response = await fetch('http://localhost:5002/adopt-pet', {
+      const response = await fetch('/api/adopt-pet', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

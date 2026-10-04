@@ -2,71 +2,38 @@ const sequelize = require('./util/index');
 const Pet = require('./models/Pet');
 const AdoptForm = require('./models/AdoptForm');
 
+const petNames = ["Bella", "Max", "Luna", "Charlie", "Lucy", "Cooper", "Daisy", "Milo", "Zoe", "Rocky", "Stella", "Bear", "Lily", "Tucker", "Lola", "Oliver", "Sadie", "Duke", "Chloe", "Teddy", "Penny", "Leo", "Ruby", "Winston", "Rosie", "Zeus", "Nala", "Bandit", "Mia", "Toby", "Piper", "Finn", "Coco", "Buster", "Gracie", "Murphy", "Abby", "Bruno", "Ginger", "Jasper", "Roxy", "Harley", "Riley", "Gus", "Sasha", "Ollie", "Hazel", "Hank", "Willow", "Oscar"];
+const locations = ["Delhi", "Mumbai", "Bangalore", "Chennai", "Kolkata", "Pune", "Hyderabad", "Jaipur", "Ahmedabad", "Chandigarh"];
+const types = ["Dog", "Cat", "Rabbit", "Bird"];
+const statuses = ["Approved", "Pending", "Adopted"];
+
 (async () => {
     try {
-        await sequelize.sync({ force: false });
-        console.log("Database synced successfully!");
+        await sequelize.sync({ force: true });
+        console.log("Database synced and reset successfully!");
 
-        // Create sample pets if none exist
-        const petCount = await Pet.count();
-        if (petCount === 0) {
-            const pets = [
-                {
-                    name: 'Max',
-                    age: '2 years',
-                    area: 'Delhi',
-                    justification: 'Moving to a new apartment that does not allow pets',
-                    email: 'owner1@example.com',
-                    phone: '9876543210',
-                    type: 'Dog',
-                    filename: 'default-pet.jpg',
-                    status: 'Approved'
-                },
-                {
-                    name: 'Luna',
-                    age: '1 year',
-                    area: 'Mumbai',
-                    justification: 'Found as a stray kitten, need to find her a loving home',
-                    email: 'owner2@example.com',
-                    phone: '8765432109',
-                    type: 'Cat',
-                    filename: 'default-pet.jpg',
-                    status: 'Pending'
-                },
-                {
-                    name: 'Buddy',
-                    age: '3 years',
-                    area: 'Bangalore',
-                    justification: 'Owner moving abroad',
-                    email: 'owner3@example.com',
-                    phone: '7654321098',
-                    type: 'Dog',
-                    filename: 'default-pet.jpg',
-                    status: 'Adopted'
-                }
-            ];
-            
-            await Pet.bulkCreate(pets);
-            console.log('Sample pets created');
-            
-            // Create a sample adoption form
-            const pet = await Pet.findOne({ where: { status: 'Adopted' } });
-            if (pet) {
-                await AdoptForm.create({
-                    email: 'adopter@example.com',
-                    phoneNo: '9988776655',
-                    livingSituation: 'House with yard',
-                    previousExperience: 'Had dogs for 10 years',
-                    familyComposition: 'Couple with no children',
-                    petId: pet.id
-                });
-                console.log('Sample adoption form created');
-            }
+        const petsToInsert = [];
+        for (let i = 0; i < 50; i++) {
+            petsToInsert.push({
+                name: petNames[i],
+                age: `${Math.floor(Math.random() * 5) + 1} years`,
+                area: locations[Math.floor(Math.random() * locations.length)],
+                justification: 'Looking for a loving forever home!',
+                email: `owner${i}@example.com`,
+                phone: `98765432${i.toString().padStart(2, '0')}`,
+                type: types[Math.floor(Math.random() * types.length)],
+                filename: 'default-pet.jpg',
+                status: statuses[Math.floor(Math.random() * statuses.length)]
+            });
         }
+        
+        await Pet.bulkCreate(petsToInsert);
+        console.log('50 Sample pets created successfully!');
+        
         console.log('Database seeding completed successfully!');
     } catch (error) {
         console.error("Error seeding database:", error);
     } finally {
         process.exit();
     }
-})(); 
+})();

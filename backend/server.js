@@ -43,7 +43,7 @@ const petRouter = require('./Routes/PetRouteSQL');
 const petCareRouter = require('./Routes/PetCareRoutes');
 
 // Use API prefix for routes in production
-const apiPrefix = process.env.NODE_ENV === 'production' ? '/api' : '';
+const apiPrefix = '/api';
 app.use(apiPrefix, petRouter);
 app.use(`${apiPrefix}/care`, petCareRouter);
 
@@ -98,6 +98,8 @@ const startServer = (port) => {
 };
 
 // Start the server
-startServer(PORT);
+if (!process.env.VERCEL) {
+  startServer(PORT);
+}
 
 module.exports = app;

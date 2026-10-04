@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import postPet from "./images/postPet.png";
@@ -86,8 +88,8 @@ const PostPetSection = () => {
     }
 
     try {
-      console.log("Submitting form to:", "http://localhost:5002/post-pet");
-      const response = await fetch("http://localhost:5002/post-pet", {
+      console.log("Submitting form to:", "/api/post-pet");
+      const response = await fetch("/api/post-pet", {
         method: "POST",
         body: formData,
       });

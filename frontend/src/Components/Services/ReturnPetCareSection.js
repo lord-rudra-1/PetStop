@@ -55,7 +55,7 @@ const ReturnPetCareSection = () => {
         returnDate,
       });
       
-      const response = await fetch("http://localhost:5002/return-pet-care", {
+      const response = await fetch("/api/return-pet-care", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

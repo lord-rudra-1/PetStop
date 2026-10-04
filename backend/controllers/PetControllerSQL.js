@@ -212,7 +212,7 @@ exports.makePetAvailable = async (req, res) => {
     }
     
     // Make the pet available
-    await pet.update({ status: 'available' });
+    await pet.update({ status: 'Available' });
     
     res.status(200).json({
       message: 'Pet is now available for adoption or care',

@@ -24,17 +24,12 @@ const PetCare = require('./models/PetCare');
 
 const app = express();
 
-// CORS configuration
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL || 'https://pet-stop.vercel.app'] 
-    : ['http://localhost:3000', 'http://localhost:5173'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// CORS configuration - allow all origins since API and frontend are on same domain in production
+app.use(cors());
 
 // Middleware
-app.use('/images', express.static(path.join(__dirname, 'images')));
+const imagesDir = process.env.VERCEL ? '/tmp/images' : path.join(__dirname, 'images');
+app.use('/images', express.static(imagesDir));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -80,7 +75,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5002;
+const PORT = parseInt(process.env.PORT, 10) || 5002;
 
 // Function to start the server
 const startServer = (port) => {

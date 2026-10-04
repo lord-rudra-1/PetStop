@@ -9,7 +9,7 @@ const sequelize = require('../util/index');
 const { Op } = require('sequelize');
 
 // Ensure images directory exists
-const imagesDir = path.join(__dirname, '../images');
+const imagesDir = process.env.VERCEL ? '/tmp/images' : path.join(__dirname, '../images');
 if (!fs.existsSync(imagesDir)) {
   console.log(`Creating images directory at ${imagesDir}`);
   fs.mkdirSync(imagesDir, { recursive: true });
@@ -18,7 +18,7 @@ if (!fs.existsSync(imagesDir)) {
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../images'));
+    cb(null, imagesDir);
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9) + path.extname(file.originalname));
@@ -123,7 +123,7 @@ router.get('/approvedPets', async (req, res) => {
     const pets = await Pet.findAll({
       where: {
         status: {
-          [Op.notIn]: ['In Care', 'in care', 'completed', 'Adopted', 'adopted'] // Also exclude adopted pets
+          [Op.notIn]: ['In Care', 'Adopted'] // Also exclude adopted pets
         }
       }
     });

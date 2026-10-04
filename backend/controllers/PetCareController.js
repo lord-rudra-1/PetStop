@@ -130,7 +130,7 @@ exports.createPetCare = async (req, res) => {
 
     // Update pet availability status - handle case sensitivity
     await pet.update({ 
-      status: pet.status === 'available' ? 'in_care' : 
+      status: pet.status === 'available' ? 'In Care' : 
               pet.status === 'Available' ? 'In Care' : 'In Care'
     });
 
@@ -181,7 +181,7 @@ exports.returnPetFromCare = async (req, res) => {
     });
 
     // Update pet status
-    await Pet.update({ status: 'available' }, { where: { id: petCare.petId } });
+    await Pet.update({ status: 'Available' }, { where: { id: petCare.petId } });
 
     return res.status(200).json({
       message: 'Pet has been returned from care successfully',

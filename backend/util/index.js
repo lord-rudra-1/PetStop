@@ -2,17 +2,14 @@ const { Sequelize } = require('sequelize');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
-// Log the config values for debugging
+const dialect = process.env.DIALECT || 'sqlite';
+
 console.log("DB Config:", {
   DB_NAME: process.env.DB_NAME,
-  DB_USERNAME: process.env.DB_USERNAME, 
-  PASS: process.env.PASS,
+  DB_USERNAME: process.env.DB_USERNAME,
   HOST: process.env.HOST,
-  DIALECT: process.env.DIALECT || 'mysql'
+  DIALECT: dialect
 });
-
-// Default to mysql if no dialect is specified
-const dialect = process.env.DIALECT || 'mysql';
 
 const sequelize = new Sequelize(
   process.env.DB_NAME || 'petstop_db',
@@ -20,15 +17,18 @@ const sequelize = new Sequelize(
   process.env.PASS || '', 
   {
     host: process.env.HOST || 'localhost',
+    port: process.env.DB_PORT || 5432,
     dialect,
-    ...(dialect === 'mysql' && {
+    ...(dialect === 'sqlite' && { storage: path.join(__dirname, '../database.sqlite') }),
+    ...((dialect === 'mysql' || dialect === 'postgres') && {
       dialectOptions: {
         ssl: {
           require: true,
           rejectUnauthorized: false
         }
       }
-    })
+    }),
+    logging: false
   }
 );
 
@@ -42,4 +42,4 @@ async function testConnection() {
 }
 testConnection();
 
-module.exports = sequelize; 
+module.exports = sequelize;
